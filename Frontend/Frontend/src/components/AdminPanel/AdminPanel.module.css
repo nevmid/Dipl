@@ -1,0 +1,72 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+    gap: 20px;
+}
+
+.spinner{
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #00F5FF;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.main_container {
+    padding: 50px;
+    margin: 0px;
+    background-color: #0A0A1A;
+    min-height: 100vh;
+}
+
+.admin_panel{
+    background: rgba(26, 26, 53, 0.95);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    flex-direction: column;
+}
+
+.admin_panel h2{
+    color: whitesmoke;
+    font-size: 20pt;
+    margin: 15px 0;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(10, 10, 26, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(62, 62, 62);
+    column-gap: 10px;
+}
+
+.nav_btn{
+    background: transparent;
+    border: none;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12pt;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav_btn:hover{
+    background: #4D9EFF;
+}

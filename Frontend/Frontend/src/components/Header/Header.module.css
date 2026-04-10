@@ -1,0 +1,148 @@
+.header{
+    background: rgba(10, 10, 26, 0.95);
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: "Heebo", Georgia;
+    font-weight: 700;
+    font-size: 30px;
+    align-items: center;
+    padding-block: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 70px;
+}
+
+.navigation{
+    display: flex;
+    text-decoration: none;
+    justify-content: space-between;
+    column-gap: 10px;
+    
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.navigation ul{
+    display: flex;
+    gap: 30px; 
+}
+
+.navigation li{
+    display: inline-block;
+}
+
+.navigation li a{
+    color:#ffffff;
+    text-decoration: none;
+    position: relative;
+    font-weight: 600;
+}
+
+.navigation li a:hover{
+    color: #00F5FF;
+    text-shadow: 0 0 10px rgba(0, 183, 189, 0.5);
+}
+
+.navigation li a::before{
+    content: '';
+    background: #00F5FF;
+    text-decoration: none;
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navigation a:hover::before{
+    width: 100%;
+}
+
+.logo_cinema{
+    color: #00F5FF;
+}
+
+.auth_btns{
+    display: flex;
+    align-items: center;
+    max-width: 196.15px;
+    height: 40px;
+}
+
+.reg_btn, .login_btn{
+    padding: 5px;
+    text-decoration: none;
+    font-size: 14pt;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    /* border: 1px solid #006568; */
+    color: #00F5FF;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.login_btn:hover{
+  background: #4D9EFF;
+  color: #0A0A1A;
+  box-shadow: 0 0 5px rgba(0, 245, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.reg_btn:hover{
+  background: #4D9EFF;
+  color: #0A0A1A;
+  box-shadow: 0 0 5px rgba(0, 245, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.user_menu{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    min-width: 196.15px;
+    justify-content: flex-end;
+}
+
+.admin_btn{
+    padding: 5px;
+    text-decoration: none;
+    font-size: 18pt;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    /* border: 1px solid #006568; */
+    color: #00F5FF;
+    transition: all 0.2s ease;
+}
+
+.admin_btn:hover{
+  background: #4D9EFF;
+  color: #0A0A1A;
+  box-shadow: 0 0 5px rgba(0, 245, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+}
+
+.acc_img {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    transition: transform 0.2s ease;
+}
+
+.acc_img:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 3px rgb(255, 255, 255)
+}
