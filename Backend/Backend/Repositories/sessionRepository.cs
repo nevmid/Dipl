@@ -25,12 +25,16 @@ namespace Backend.Repositories
                 .Include(s => s.Movie)
                 .Include(s => s.Hall)
                 .Include(s => s.Bookings)
+                    .ThenInclude(b => b.BookingSeats)
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<List<Session>> GetSessions()
         {
-            return await _context.Sessions.ToListAsync();
+            return await _context.Sessions
+                .Include(s => s.Hall)
+                .Include(s => s.Movie)
+                .ToListAsync();
         }
 
         public async Task<bool> IsHallAvailable(int id, DateTime startTime, DateTime endTime)

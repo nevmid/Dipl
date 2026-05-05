@@ -8,7 +8,6 @@ export default function MovieInfo (){
     const { id } = useParams(); 
 
     useEffect(() => {
-        console.log(id);
         fetchMovie(id);
     }, [id]);
 
@@ -57,26 +56,40 @@ export default function MovieInfo (){
 
     return(
     <div className={classes.container}>
-        <div className={classes.poster}
-         style={{backgroundImage: `url("${"http://localhost:5014" + movie.posterUrl}")`}}>
-            <div className={classes.btn_back}>
-                <Link to="/movies" className={classes.btn_link}>← Назад</Link>
-            </div>
-            <h2>{movie.title}</h2>
+        <div className={classes.btn_back}>
+            <Link to="/movies" className={classes.btn_link}>← Назад</Link>
         </div>
-        <div className={classes.info_container}>
-            <div className={classes.trailer_description}>
+
+        <div className={classes.content}>
+            <div className={classes.poster_section}>
+                <div 
+                    className={classes.poster}
+                    style={{ backgroundImage: `url("http://localhost:5014${movie.posterUrl}")` }}
+                >
+                    {/* <h2>{movie.title}</h2>
+                    <h4>{movie.year}</h4> */}
+                </div>
+            </div>
+
+            <div className={classes.info_section}>
+                <div className={classes.title}>
+                    <span>{movie.title} ({movie.year})</span>
+                </div>
+                <div className={classes.orig_title}>
+                    <span>{movie.originalTitle}</span>
+                </div>
                 <div className={classes.description}>
                     <h2>Описание</h2>
                     <p>{movie.description}</p>
                 </div>
+
                 <div className={classes.trailer}>
                     <h2>Трейлер</h2>
                     {embedUrl ? (
                         <iframe
                             src={embedUrl}
                             title="Трейлер"
-                            webkitAllowFullScreen mozallowfullscreen allowFullScreen
+                            allowFullScreen
                         />
                     ) : (
                         <div className={classes.trailer_placeholder}>
@@ -84,9 +97,8 @@ export default function MovieInfo (){
                         </div>
                     )}
                 </div>
-            </div>
-            <div className={classes.main_info}>
-                <div className={classes.movie_info}>
+
+                <div className={classes.main_info}>
                     <h2>Основная информация</h2>
                     <ul className={classes.list}>
                         <li>
@@ -99,7 +111,7 @@ export default function MovieInfo (){
                         </li>
                         <li>
                             <span className={classes.info_label}>Длительность:</span>
-                            <span className={classes.info_value}>{movie.duration}</span>
+                            <span className={classes.info_value}>{movie.duration} мин.</span>
                         </li>
                         <li>
                             <span className={classes.info_label}>Рейтинг:</span>

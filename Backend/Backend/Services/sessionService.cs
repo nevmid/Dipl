@@ -59,13 +59,32 @@ namespace Backend.Services
             }
         }
 
-        public async Task<List<Session>> GetAll()
+        public async Task<List<sessionsResponseDto>> GetAll(DateTime? date)
         {
             try
             {
                 var sessions = await _sessionRepository.GetSessions();
 
-                return sessions;
+                if (date != null)
+                {
+                    sessions = sessions.Where(s => s.StartTime.Date == date.Value.Date).ToList();
+                }
+
+                var response = sessions
+                    .Select(s => new sessionsResponseDto
+                    {
+                        Id = s.Id,
+                        MovieId = s.MovieId,
+                        HallId = s.HallId,
+                        StartTime = s.StartTime,
+                        EndTime = s.EndTime,
+                        Price = s.Price,
+                        Movie = s.Movie,
+                        Hall = s.Hall
+                    })
+                    .ToList();
+
+                return response;
             }
             catch (Exception)
             {
@@ -73,13 +92,26 @@ namespace Backend.Services
             }
         }
 
-        public async Task<Session?> GetInfoAboutSession(int id)
+        public async Task<sessionsResponseDto?> GetInfoAboutSession(int id)
         {
             try
             {
                 var session = await _sessionRepository.GetSessionById(id);
 
-                return session;
+                if (session == null)
+                    return null;
+
+                return new sessionsResponseDto {
+                    Id = session.Id,
+                    MovieId = session.MovieId,
+                    HallId = session.HallId,
+                    StartTime = session.StartTime,
+                    EndTime = session.EndTime,
+                    Price = session.Price,
+                    //Movie = session.Movie,
+                    //Hall = session.Hall,
+                    Bookings = session.Bookings
+                };
             }
             catch (Exception)
             {

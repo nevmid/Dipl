@@ -1,7 +1,7 @@
 import {createContext, useState, useContext, useEffect} from 'react'
 import Cookies from 'js-cookie';
 
-const API_BASE_URL = 'http://localhost:5014/api/';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const AuthContext = createContext();
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try{
-                const response = await fetch(`${API_BASE_URL}users/profile`, {
+                const response = await fetch(`${API_BASE_URL}/users/profile`, {
                     method: "GET",
                     credentials: 'include',
                 });
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         setIsLoading(true)
         try{
-            const response = await fetch(`${API_BASE_URL}auth/login`, {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ email, password}),
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
         try{
             setIsLoading(true);
 
-            const response = await fetch(`${API_BASE_URL}auth/register`,{
+            const response = await fetch(`${API_BASE_URL}/auth/register`,{
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, password, ConfirmPassword: repeatPassword}),
@@ -115,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
     try {
-        await fetch(`${API_BASE_URL}auth/logout`, {
+        await fetch(`${API_BASE_URL}/auth/logout`, {
             method: 'POST',
             credentials: 'include',
       });

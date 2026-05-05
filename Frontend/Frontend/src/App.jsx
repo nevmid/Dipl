@@ -10,6 +10,7 @@ import Register from './components/RegisterWindow/Register'
 import MoviesList from './components/MoviesList/Movies'
 import MovieInfo from './components/MovieInfo/MovieInfo'
 import AdminPanel from './components/AdminPanel/AdminPanel'
+import Schedule from './components/Schedule/Schedule'
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Schedule />} />
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/movies" element={<MoviesList />}/>
+          {/* <Route path="/schedule" element={<Schedule />}/> */}
           <Route path="/movies/:id" element={<MovieInfo />}/>
           <Route path="/admin" element={<AdminPanel />}/>
           <Route path="*" element={<Navigate to="/" />} />

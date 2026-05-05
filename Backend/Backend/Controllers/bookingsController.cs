@@ -75,17 +75,17 @@ namespace Backend.Controllers
                 var booking = await _bookingService.CreateBookingAsync(userId, dto);
 
                 if (booking == null)
-                    return BadRequest(new { Error = "Ошибка при создании бронирования" });
+                    return BadRequest(new { message = "Ошибка при создании бронирования" });
 
                 return Ok(booking);
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(new { Error = ex.Message });
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception)
             {

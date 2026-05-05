@@ -19,6 +19,7 @@
     justify-content: center;
     gap: 50px;
     position: relative;
+    padding-bottom: 10px;
 }
 
 .main_list h2{

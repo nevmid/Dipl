@@ -3,7 +3,6 @@ import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import classes from './Movies.module.css';
 
-
 export default function MoviesList(){
     const {movies, fetchMovies, isLoading} = useMovie();
 
@@ -18,7 +17,7 @@ export default function MoviesList(){
                 <p>Загрузка...</p>
             </div>
         );
-        }
+    }
 
     return(
     <>
@@ -28,16 +27,14 @@ export default function MoviesList(){
                 <div className={classes.list}>
                     {movies.map((el) => {
                         return(
-                            <>
                             <div key={el.id} className={classes.list_item}
-                                style={{ backgroundImage: `url("${"http://localhost:5014" + el.posterUrl}")` }}>
+                                style={{ backgroundImage: `url("http://localhost:5014${el.posterUrl}")` }}>
                                 <h2>{el.title}</h2>
                                 <h4>{el.year}</h4>
                                 <Link to={`/movies/${el.id}`} className={classes.info}>
                                     Подробнее
                                 </Link>
                             </div>
-                            </>
                         );
                     })}
                 </div>

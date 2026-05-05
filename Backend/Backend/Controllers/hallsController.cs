@@ -24,11 +24,11 @@ namespace Backend.Controllers
             {
                 var halls = await _hallService.GetHalls();
 
-                return Ok(halls);
+                return Ok(new { success = true, halls });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Get Halls");
+                return StatusCode(500, new { success = false, message = "Server Error | Get Halls" });
             }
         }
 
@@ -40,13 +40,13 @@ namespace Backend.Controllers
                 var hall = await _hallService.GetHallById(id);
 
                 if (hall == null)
-                    return BadRequest(new { message = "Зал не найден" });
+                    return BadRequest(new {success = false, message = "Зал не найден" });
 
-                return Ok(hall);
+                return Ok(new { success = true, hall });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Get Info About Hall");
+                return StatusCode(500, new { success = false, message = "Server Error | Get Info About Hall" });
             }
         }
 

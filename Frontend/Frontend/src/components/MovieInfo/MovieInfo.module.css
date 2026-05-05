@@ -1,165 +1,145 @@
 .container {
     min-height: 100vh;
     background: linear-gradient(135deg, #0A0A1A 0%, #1A1A35 100%);
-    /* display: flex; */
-    /* justify-content: center; */
+}
+
+.btn_back {
+    margin-bottom: 40px;
+    padding: 20px 0 0 30px;
+}
+
+.btn_link {
+    color: white;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn_link:hover {
+    background: #00F5FF;
+    color: #0A0A1A;
+    transform: translateX(-5px);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+}
+
+.content {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+
+.poster_section {
+    flex: 0 0 350px;
 }
 
 .poster{
-    height: 80vh;
-
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    overflow: hidden;
-    position: relative;
-
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
-    justify-content: end;    
+    justify-content: flex-end; 
+    
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    height: 500px;
+    
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .poster h2{
-    color: whitesmoke;
-    z-index: 2;
-    margin-bottom: 50px;
-    font-size: 42pt;
-    text-align: center;
-}
-
-.poster::before{
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 100%);
-}
-
-.btn_back{
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    z-index: 2;
-}
-
-.btn_link{
-    color: white;
-    text-decoration: none;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 25px;
-    border-radius: 30px;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.btn_link:hover{
-    background: rgba(0, 245, 255, 0.9);
-    color: #0A0A1A;
-    transform: translateX(-5px);
-}
-
-.info_container{
-    /* margin: 10px; */
-    background: rgba(26, 26, 53, 0.95);
-    position: relative;
-    padding: 0 40px 60px;
-    margin: -35px 50px 0;
-    border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    border: 1px solid rgba(0, 245, 255, 0.3);
-}
-
-.info_container{
-    padding: 30px;
-    display: flex;
-    /* justify-content: space-between; */
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.trailer_description{
-    flex: 1.5;
-    min-width: 250px;
-    
-}
-
-.trailer_description h2{
-    color: #00F5FF;
-    font-size: 24px;
-    margin-bottom: 10px;
-    border-left: 3px solid #00F5FF;
-    padding-left: 15px;
-}
-
-.description p{
-    font-size: 14pt;
-    padding: 8px 10px 10px 15px;
-    color: #E0E0E0;
-}
-
-.description, .trailer, .movie_info{
-    background: rgba(10, 10, 26, 0.7);
-    border-radius: 10px;
-    padding: 10px 20px 20px;
-    margin-bottom: 10px;
-}
-
-.trailer{
-    margin-top: 10px;
-}
-
-.trailer h2{
-    margin-bottom: 10px;
-}
-
-.main_info {
-    flex: 1;
-    min-width: 250px;
-}
-
-.movie_info h2 {
-    color: #00F5FF;
-    font-size: 24px;
-    margin-bottom: 20px;
-    border-left: 3px solid #00F5FF;
-    padding-left: 15px;
-}
-
-.list{
-    list-style: none;
-}
-
-.list li{
-    display: flex;
-    justify-content: space-between;
-    color:  #C0C0E0;
-    border-bottom: 1px solid rgba(0, 245, 255, 0.2);
-    padding: 12px 0;
-}
-
-.list li:last-child{
-    border-bottom: none;
-}
-
-.info_label{
-    color: #00F5FF;
+    color: whitesmoke;;
+    background: none;
+    z-index: 1;
+    font-size: 24pt;
     font-weight: 600;
+    text-align: center;
+    padding: 0;
 }
 
-.info_value{
+.poster h4{
+    color: #C0C0E0;
+    background: none;
+    z-index: 1;
+    margin: 0 10px 15px;
+}
+
+.info_section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title{
+    color: white;
+    font-size: 42px;
+    /* margin-bottom: 15px; */
+    /* padding-left: 15px; */
+}
+
+.orig_title{
+    color: #C0C0E0;
+    font-size: 24px;
+    /* margin-top: -10px; */
+    /* margin-bottom: 15px; */
+    /* padding-left: 15px; */
+}
+
+.description {
+    background: rgba(26, 26, 53, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.description h2 {
+    color: #00F5FF;
+    font-size: 22px;
+    margin-bottom: 15px;
+    border-left: 3px solid #00F5FF;
+    padding-left: 15px;
+}
+
+.description p {
     color: #E0E0E0;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.trailer {
+    background: rgba(26, 26, 53, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.trailer h2 {
+    color: #00F5FF;
+    font-size: 22px;
+    margin-bottom: 15px;
+    border-left: 3px solid #00F5FF;
+    padding-left: 15px;
 }
 
 .trailer iframe {
     width: 100%;
-    height: 405px;
-    border-radius: 10px;
+    height: 605px;
     border: none;
+    border-radius: 10px;
 }
 
 .trailer_placeholder {
@@ -172,7 +152,48 @@
     justify-content: center;
     color: #C0C0E0;
     font-size: 18px;
-    gap: 10px;
+}
+
+.main_info {
+    background: rgba(26, 26, 53, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.main_info h2 {
+    color: #00F5FF;
+    font-size: 22px;
+    margin-bottom: 15px;
+    border-left: 3px solid #00F5FF;
+    padding-left: 15px;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+}
+
+.list li:last-child {
+    border-bottom: none;
+}
+
+.info_label {
+    color: #C0C0E0;
+    font-weight: 500;
+}
+
+.info_value {
+    color: white;
+    font-weight: 600;
 }
 
 .loading, .error {
@@ -186,22 +207,26 @@
     gap: 20px;
 }
 
-.spinner{
+.spinner {
     width: 50px;
     height: 50px;
     border: 3px solid rgba(0, 245, 255, 0.3);
-    border-radius: 50%;
     border-top-color: #00F5FF;
+    border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    to{
+    to {
         transform: rotate(360deg);
     }
+}
+
+.error {
+    text-align: center;
 }
 
 .error p {
     font-size: 24px;
     margin-bottom: 20px;
-} 
+}

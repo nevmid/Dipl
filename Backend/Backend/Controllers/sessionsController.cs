@@ -19,17 +19,18 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] DateTime? date)
         {
             try
             {
-                var sessions = await _sessionService.GetAll();
-
-                return Ok(sessions);
+                Console.WriteLine(date);
+                var sessions = await _sessionService.GetAll(date);
+                //Console.WriteLine(sessions[0].Hall.Name);
+                return Ok(new { success = true, sessions });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Get Sesions");
+                return StatusCode(500, new { success = false, message = "Server Error | Get Sesions" });
             }
         }
 
@@ -41,13 +42,13 @@ namespace Backend.Controllers
                 var session = await _sessionService.GetInfoAboutSession(id);
 
                 if (session == null)
-                    return BadRequest(new { message = "Сеанс не найден" });
+                    return BadRequest(new { success = false, message = "Сеанс не найден" });
 
-                 return Ok(session);
+                return Ok(new { success = true, session });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Server Error | Get Info About Session");
+                return StatusCode(500, new { success = false, message = $"Server Error | Get Info About Session: {ex.Message}" });
             }
         }
 

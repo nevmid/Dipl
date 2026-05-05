@@ -26,7 +26,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new SessionConfiguration());
         modelBuilder.ApplyConfiguration(new HallConfiguration());
         modelBuilder.ApplyConfiguration(new BookingConfiguration());
-        modelBuilder.ApplyConfiguration(new BookingConfiguration());
+        modelBuilder.ApplyConfiguration(new BookingSeatConfiguration());
         modelBuilder.ApplyConfiguration(new SeatConfiguration());
         modelBuilder.ApplyConfiguration(new LoyaltyAccountConfiguration());
         modelBuilder.ApplyConfiguration(new PaymentConfiguration());

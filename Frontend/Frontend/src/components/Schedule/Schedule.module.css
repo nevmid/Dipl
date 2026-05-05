@@ -1,0 +1,235 @@
+.loading, .error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+    gap: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    text-align: center;
+}
+
+.error p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.container {
+    padding: 50px;
+    margin: 0px;
+    background-color: #0A0A1A;
+    min-height: 100vh;
+}
+
+.main_list {
+    width: 100%;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.main_list h2{
+    padding: 15px;
+    text-align: center;
+    font-size: 28pt;
+    background-color: rgba(10, 10, 26, 0.95);
+    padding-bottom: 50px;
+}
+
+.list{
+    background-color: rgba(10, 10, 26, 0.95);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    /* padding-bottom: 10px; */
+    padding: 10px 20px 0 20px;
+}
+
+.date_container{
+    background-color: rgba(10, 10, 26, 0.95);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    /* justify-content: space-between; */
+    /* gap: 15px; */
+    /* margin-bottom: 40px; */
+}
+
+.date_container::before{
+    content: '';
+    position: absolute;
+    background: #00F5FF;
+    height: 2px;
+    width: 100%;
+    bottom: -1px;
+}
+
+.date_card{
+    min-width: 100px;
+    background: transparent;
+    border: none;
+    padding: 15px 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.date_card:hover {
+    transform: translateY(-5px);
+    border-color: #00F5FF;
+    box-shadow: 0 5px 20px rgba(0, 245, 255, 0.2);
+}
+
+.date_card.active {
+    background: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+    border-radius: 2px 2px 0 0;
+}
+
+.day_name{
+    color: white;
+    padding-bottom: 3px;
+    font-size: 14pt;
+}
+
+.date{
+   color: #C0C0E0;
+   font-size: 12pt;
+}
+
+.no_sessions {
+    text-align: center;
+    padding: 60px;
+    color: #C0C0E0;
+}
+
+.movie_card {
+    display: flex;
+    gap: 20px;
+    background: rgba(26, 26, 53, 0.8);
+    border-radius: 15px;
+    padding: 15px;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movie_poster {
+    width: 160px;
+    height: 220px;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.movie_poster img {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.movie_info{
+    width: 100%;
+}
+
+.movie_info h4 {
+    color: #00F5FF;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.movie_year, .movie_duration {
+    color: #C0C0E0;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.time_slots {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 5px;
+}
+
+.time_slots:not(:last-child){
+    border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.price{
+    color: #C0C0E0;
+    font-size: 12px;
+    padding-left: 4px;
+}
+
+.hall_name{
+    color: #C0C0E0;
+    font-size: 12px;
+    min-width: 70px;
+}
+
+.time_slot{
+    display: flex;
+}
+
+.time_btn {
+    background: transparent;
+    border: none;
+    color: #00F5FF;
+    cursor: pointer;
+    font-size: 18pt;
+    position: relative;
+    transition: all 0.1s ease;
+}
+
+.time_btn::before{
+    content: '';
+    width: 0;
+    background-color: #00F5FF;
+    height: 1px;
+    bottom: -2px;
+    position: absolute;
+    transition: all 0.1s ease;
+}
+
+.time_btn:hover {
+    /* background: #00F5FF; */
+    color: #008b90;
+    /* transform: translateY(-2px); */
+}
+
+.time_btn:hover::before{
+    width: 100%;
+}

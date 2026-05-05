@@ -79,8 +79,8 @@ namespace Backend.Services
 
                 var movie = new Movie
                 {
-                    Title = createMovieDto.Title.Trim().ToLower(),
-                    OriginalTitle = createMovieDto.OriginalTitle.Trim().ToLower(),
+                    Title = createMovieDto.Title.Trim(),
+                    OriginalTitle = createMovieDto.OriginalTitle.Trim(),
                     Description = createMovieDto.Description,
                     Year = createMovieDto.Year,
                     Duration = createMovieDto.Duration,

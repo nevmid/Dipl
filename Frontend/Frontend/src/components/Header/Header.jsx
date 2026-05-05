@@ -23,8 +23,8 @@ export default function Header(){
             </div>
             <nav className={classes.navigation}>
                 <ul>
-                    <li><Link to="/">Главная</Link></li>
-                    <li><Link to="/sessions">Расписание</Link></li>
+                    {/* <li><Link to="/">Главная</Link></li> */}
+                    <li><Link to="/">Расписание</Link></li>
                     <li><Link to="/movies">Афиша</Link></li>
                     {/* <li><Link to="/bar">Кино-бар</Link></li> */}
                 </ul>

@@ -1,6 +1,6 @@
 import { useContext, createContext, useState } from "react";
 
-const API_BASE_URL = 'http://localhost:5014/api/';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 const MovieContext = createContext();
 
 export const useMovie = () => {
@@ -15,7 +15,7 @@ export const MovieProvider = ({children}) => {
     const fetchMovies = async () => {
         setIsLoading(true);
         try{
-            const response = await fetch(`${API_BASE_URL}movies`, {
+            const response = await fetch(`${API_BASE_URL}/movies`, {
                 method: "GET",
             });
 
@@ -39,7 +39,7 @@ export const MovieProvider = ({children}) => {
     const fetchMovie = async (id) => {
         setIsLoading(true);
         try{
-            const response = await fetch(`${API_BASE_URL}movies/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/movies/${id}`, {
                 method: "GET",
             });
 
