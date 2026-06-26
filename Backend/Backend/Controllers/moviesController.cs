@@ -84,11 +84,11 @@ namespace Backend.Controllers
             {
                 return BadRequest(new {success = false, message = ex.Message });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(500,
                     new { success = false,
-                        message = "Server Error | Create Movie" });
+                        message = $"Server Error | Create Movie{ex}" });
             }
         }
 
@@ -156,6 +156,25 @@ namespace Backend.Controllers
                 {
                     success = false,
                     message = "Server Error | Delete Movie"
+                });
+            }
+        }
+
+        [HttpGet("genres")]
+        public async Task<IActionResult> GetAllGenres()
+        {
+            try
+            {
+                var genres = await _movieService.GetAllGenres();
+
+                return Ok(genres);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "Server Error | Get Genres"
                 });
             }
         }

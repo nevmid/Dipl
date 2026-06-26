@@ -10,7 +10,7 @@ namespace Backend.Models.DTOs.BookingDTOs
         [Required]
         [MinLength(1)]
         public List<int> SeatIds { get; set; } = new();
-        public string? PaymentMethod { get; set; }
+        public bool isBonusUsed { get; set; }
 
     }
 }

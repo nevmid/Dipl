@@ -17,10 +17,12 @@ var jwtSettings = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>
 var connection = builder.Configuration.GetConnectionString("ApplicationContext");
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+builder.Services.Configure<YookassaSettings>(builder.Configuration.GetSection("YooKassa"));
 builder.Services.AddScoped<JwtProvider>();
 builder.Services.AddScoped<PasswordHasher>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
@@ -31,10 +33,12 @@ builder.Services.AddScoped<IHallRepository, HallRepository>();
 builder.Services.AddScoped<IHallService, HallService>();
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService>();
-builder.Services.AddScoped<IBarRepository, BarRepository>();
-builder.Services.AddScoped<IBarService, BarService>();
-builder.Services.AddScoped<IPaymentGateway, PaymentGateway>();
+builder.Services.AddScoped<IYookassaService, YooKassaService>();
 builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IRecommendationService, RecommendationService>();
+builder.Services.AddHostedService<BookingExpirationService>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -73,7 +77,7 @@ var app = builder.Build();
 
 app.UseCors(policy =>
 {
-    policy.WithOrigins("http://localhost:5173")
+    policy.WithOrigins("http://localhost:5173", "https://6rk3i9-178-141-21-81.ru.tuna.am")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials();
@@ -86,5 +90,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 app.Run();

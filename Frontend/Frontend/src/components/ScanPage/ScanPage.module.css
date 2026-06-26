@@ -1,0 +1,328 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0A0A1A 0%, #1A1A35 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loading {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #0A0A1A;
+    color: white;
+    gap: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ticketCard {
+    max-width: 500px;
+    width: 100%;
+    background: rgba(26, 26, 53, 0.95);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ticketHeader {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(124, 58, 237, 0.1));
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.headerIcon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.ticketHeader h1 {
+    color: #00F5FF;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.ticketHeader p {
+    color: #C0C0E0;
+    font-size: 14px;
+}
+
+/* Статус */
+.ticketStatus {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px dashed rgba(0, 245, 255, 0.2);
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.valid {
+    background: rgba(0, 245, 255, 0.2);
+    color: #00F5FF;
+    border: 1px solid #00F5FF;
+}
+
+.used {
+    background: rgba(255, 69, 0, 0.2);
+    color: #FF6B6B;
+    border: 1px solid #FF6B6B;
+}
+
+/* Содержимое билета */
+.ticketContent {
+    padding: 25px;
+}
+
+.movieSection {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(0, 245, 255, 0.2);
+}
+
+.movieSection h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.movieDetails {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #C0C0E0;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
+.infoSection {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+}
+
+.infoRow:last-child {
+    border-bottom: none;
+}
+
+.infoLabel {
+    color: #C0C0E0;
+    font-size: 14px;
+}
+
+.infoValue {
+    color: white;
+    font-weight: 600;
+}
+
+.usedMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 69, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid #FF4500;
+}
+
+.usedMessage span {
+    font-size: 20px;
+}
+
+.usedMessage p {
+    color: #FF6B6B;
+    margin: 0;
+}
+
+/* Footer */
+.ticketFooter {
+    padding: 20px 25px 30px;
+    border-top: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.confirmBtn {
+    width: 100%;
+    padding: 14px;
+    background: #00F5FF;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirmBtn:hover:not(:disabled) {
+    background: #33F8FF;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+.confirmBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.noAccessMessage {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.noAccessMessage span {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.noAccessMessage p {
+    color: #C0C0E0;
+    margin-bottom: 15px;
+}
+
+.loginBtn {
+    padding: 10px 20px;
+    background: #00F5FF;
+    border: none;
+    border-radius: 8px;
+    color: #0A0A1A;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.loginBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+.errorContainer {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0A0A1A 0%, #1A1A35 100%);
+    padding: 20px;
+}
+
+.errorCard {
+    max-width: 400px;
+    width: 100%;
+    background: rgba(26, 26, 53, 0.95);
+    border-radius: 30px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+.errorIcon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.errorCard h2 {
+    color: #FF6B6B;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.errorCard p {
+    color: #C0C0E0;
+    margin-bottom: 30px;
+}
+
+.backBtn {
+    padding: 12px 30px;
+    background: #00F5FF;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.backBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+@media (max-width: 480px) {
+    .ticketHeader {
+        padding: 20px;
+    }
+    
+    .ticketHeader h1 {
+        font-size: 22px;
+    }
+    
+    .movieSection h2 {
+        font-size: 18px;
+    }
+    
+    .movieDetails {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .infoRow {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .infoLabel {
+        font-size: 12px;
+    }
+    
+    .infoValue {
+        font-size: 14px;
+    }
+}

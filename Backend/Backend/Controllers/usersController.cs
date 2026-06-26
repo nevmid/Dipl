@@ -77,7 +77,7 @@ namespace Backend.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Get Users");
+                return StatusCode(500, new { success = false, message = "Server Error | Get Users" });
             }
         }
 
@@ -95,7 +95,7 @@ namespace Backend.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Search Users");
+                return StatusCode(500, new { success = false, message = "Server Error | Search Users" });
             }
         }
 
@@ -141,7 +141,7 @@ namespace Backend.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Delete Account");
+                return StatusCode(500, new { message = "Server Error | Delete Account" });
             }
         }
 
@@ -156,22 +156,22 @@ namespace Backend.Controllers
 
             try
             {
-                var result = await _userService.ChangeRole(id, request);
+                var (success, email) = await _userService.ChangeRole(id, request);
 
-                if (!result)
+                if (!success)
                 {
-                    return NotFound(new {message = "Пользователь не найден"});
+                    return NotFound(new {success = false, message = "Пользователь не найден"});
                 }
 
-                return Ok(new {message = "Роль изменена"});
+                return Ok(new {message = "Роль изменена", email});
             }
             catch(ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Change Role");
+                return StatusCode(500, new { success = false, message = "Server Error | Change Role" });
             }
         }
 
@@ -199,11 +199,11 @@ namespace Backend.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Change Password");
+                return StatusCode(500, new { success = false, message = "Server Error | Change Password" });
             }
         }
 
@@ -231,11 +231,11 @@ namespace Backend.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Change Email");
+                return StatusCode(500, new {success = false, message = "Server Error | Change Email" });
             }
         }
 
@@ -254,7 +254,7 @@ namespace Backend.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Send Reset Link");
+                return StatusCode(500, new { success = false, message = "Server Error | Send Reset Link" });
             }
         }
 
@@ -271,13 +271,13 @@ namespace Backend.Controllers
                 var result = await _userService.ResetPassword(request);
 
                 if (!result)
-                    return BadRequest(new { error = "Ошибка при сбросе пароля" });
+                    return BadRequest(new { message = "Ошибка при сбросе пароля" });
 
                 return Ok(new { message = "Пароль восстановлен" });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Reset Password");
+                return StatusCode(500, new { success = false, message = "Server Error | Reset Password" });
             }
         }
     }

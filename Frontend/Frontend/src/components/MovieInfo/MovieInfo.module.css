@@ -41,11 +41,6 @@
 }
 
 .poster{
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: flex-end; 
-    
     border: 1px solid rgba(0, 245, 255, 0.3);
     border-radius: 5px;
     overflow: hidden;
@@ -53,7 +48,7 @@
     height: 500px;
     
     background-position: center;
-    /* background-repeat: no-repeat; */
+    background-repeat: no-repeat;
     background-size: cover;
     
     position: relative;
@@ -229,4 +224,170 @@
 .error p {
     font-size: 24px;
     margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+    .content {
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .poster_section {
+        flex: 0 0 280px;
+    }
+    
+    .poster {
+        height: 420px;
+    }
+    
+    .title {
+        font-size: 32px;
+    }
+    
+    .orig_title {
+        font-size: 20px;
+    }
+    
+    .trailer iframe {
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn_back {
+        margin-bottom: 20px;
+        padding: 15px 0 0 15px;
+    }
+    
+    .btn_link {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+    
+    .content {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .poster_section {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .poster {
+        height: 400px;
+        width: 100%;
+    }
+    
+    .title {
+        font-size: 24px;
+        text-align: center;
+    }
+    
+    .orig_title {
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .description h2,
+    .trailer h2,
+    .main_info h2 {
+        font-size: 18px;
+    }
+    
+    .description p {
+        font-size: 14px;
+    }
+    
+    .trailer iframe {
+        height: 250px;
+    }
+    
+    .list li {
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px 0;
+    }
+    
+    .info_label {
+        font-size: 13px;
+    }
+    
+    .info_value {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn_back {
+        padding: 10px 0 0 10px;
+    }
+    
+    .btn_link {
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+    
+    .content {
+        padding: 0 12px;
+        gap: 15px;
+    }
+    
+    .poster_section {
+        max-width: 240px;
+    }
+    
+    .poster {
+        height: 340px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .orig_title {
+        font-size: 14px;
+    }
+    
+    .description,
+    .trailer,
+    .main_info {
+        padding: 15px;
+    }
+    
+    .description h2,
+    .trailer h2,
+    .main_info h2 {
+        font-size: 16px;
+        padding-left: 10px;
+    }
+    
+    .description p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .trailer iframe {
+        height: 200px;
+    }
+    
+    .trailer_placeholder {
+        height: 200px;
+        font-size: 14px;
+    }
+    
+    .list li {
+        padding: 8px 0;
+    }
+    
+    .info_label {
+        font-size: 12px;
+    }
+    
+    .info_value {
+        font-size: 13px;
+    }
 }

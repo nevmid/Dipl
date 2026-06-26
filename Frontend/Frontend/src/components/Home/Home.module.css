@@ -1,8 +1,197 @@
-.main_home{
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0A0A1A 0%, #1A1A35 100%);
+}
+
+.hero {
+    height: 70vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                url('../../assets/backgroundImg1.png') center/cover;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero_content h1 {
+    font-size: 56px;
+    background: linear-gradient(135deg, #00F5FF, #7C3AED);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+}
+
+.hero_content p {
+    font-size: 20px;
+    color: #C0C0E0;
+    margin-bottom: 30px;
+}
+
+.hero_btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #00F5FF;
+    color: #0A0A1A;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hero_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+}
+
+.section {
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section h2 {
+    color: #00F5FF;
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-left: 4px solid #00F5FF;
+    padding-left: 20px;
+}
+
+.section h2:first-of-type {
+    margin-top: 0;
+}
+
+.movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.movies_grid:last-child {
+    margin-bottom: 0;
+}
+
+.movie_card {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.movie_card:hover {
+    transform: translateY(-5px);
+}
+
+.movie_poster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.movie_info {
+    padding: 12px 0;
+}
+
+.movie_info h4 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie_info p {
+    color: #C0C0E0;
+    font-size: 13px;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0A0A1A;
-    
     min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+    gap: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 40px 20px;
+    }
+    
+    .hero {
+        height: 50vh;
+    }
+    
+    .hero_content h1 {
+        font-size: 36px;
+    }
+    
+    .hero_content p {
+        font-size: 16px;
+    }
+    
+    .section h2 {
+        font-size: 22px;
+    }
+    
+    .movies_grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 30px 15px;
+    }
+    
+    .hero {
+        height: 40vh;
+    }
+    
+    .hero_content h1 {
+        font-size: 28px;
+    }
+    
+    .section h2 {
+        font-size: 18px;
+    }
+    
+    .movies_grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+    
+    .movie_info h4 {
+        font-size: 13px;
+    }
+    
+    .movie_info p {
+        font-size: 11px;
+    }
 }

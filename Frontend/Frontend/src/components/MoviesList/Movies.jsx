@@ -3,6 +3,8 @@ import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import classes from './Movies.module.css';
 
+const IMAGE_URL = import.meta.env.VITE_URL;
+
 export default function MoviesList(){
     const {movies, fetchMovies, isLoading} = useMovie();
 
@@ -28,7 +30,7 @@ export default function MoviesList(){
                     {movies.map((el) => {
                         return(
                             <div key={el.id} className={classes.list_item}
-                                style={{ backgroundImage: `url("http://localhost:5014${el.posterUrl}")` }}>
+                                style={{ backgroundImage: `url("${IMAGE_URL}${el.posterUrl}")` }}>
                                 <h2>{el.title}</h2>
                                 <h4>{el.year}</h4>
                                 <Link to={`/movies/${el.id}`} className={classes.info}>

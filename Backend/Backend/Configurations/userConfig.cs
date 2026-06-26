@@ -29,11 +29,8 @@ namespace Backend.Configurations
                 .HasColumnName("created_at")
                 .HasDefaultValueSql("NOW()");
 
-            builder.Property(u => u.Role)
-                .HasColumnName("role")
-                .HasMaxLength(20)
-                .HasDefaultValue("user")
-                .HasAnnotation("CheckConstraint", "role in ('user', 'admin')");
+            builder.Property(u => u.RoleId)
+                .HasColumnName("role_id");
 
             builder.HasMany(u => u.Bookings)
                 .WithOne(b =>  b.User)
@@ -43,6 +40,11 @@ namespace Backend.Configurations
             builder.HasOne(u => u.LoyaltyAccount)
                 .WithOne(la => la.User)
                 .HasForeignKey<LoyaltyAccount>(la => la.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(u => u.Email)

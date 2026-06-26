@@ -4,7 +4,7 @@ namespace Backend.Interfaces
 {
     public interface ISessionRepository
     {
-        public Task<bool> IsHallAvailable(int id, DateTime startTime, DateTime endTime);
+        public Task<bool> IsHallAvailable(int id, DateTime startTime, DateTime endTime, int? excludeSessionId);
         public Task<Session> CreateSession(Session session);
         public Task<Session?> GetSessionById(int id);
         public Task SaveChangesAsync();

@@ -5,8 +5,8 @@ namespace Backend.Models.DTOs.UserDTOs
     public class ChangeRoleDto
     {
         [Required]
-        [RegularExpression(@"^(user|admin)$",
-            ErrorMessage = "Доступные роли: 'user', 'admin'")]
+        [RegularExpression(@"^(user|admin|staff)$",
+            ErrorMessage = "Доступные роли: 'user', 'admin', 'staff'")]
         public string Role { get; set; } = "user";
     }
 }

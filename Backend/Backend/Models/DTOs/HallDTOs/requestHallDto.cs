@@ -10,10 +10,10 @@ namespace Backend.Models.DTOs.HallDTOs
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
         [Required(ErrorMessage="Количество рядов для мест обязательно")]
-        [Range(0, 100, ErrorMessage = "Количество рядов от 0 до 100")]
+        [Range(0, 20, ErrorMessage = "Количество рядов от 0 до 20")]
         public int RowNum { get; set; }
         [Required(ErrorMessage = "Количество мест в ряду обязательно")]
-        [Range(0, 100, ErrorMessage = "Количество мест от 0 до 100")]
+        [Range(0, 20, ErrorMessage = "Количество мест в ряду от 0 до 20")]
         public int ColNum { get; set; }
     }
 }

@@ -9,12 +9,16 @@ export default function Register() {
     const [repeatPassword, setRepeatPassword] = useState('');
     const {register, isLoading} = useAuth();
     const [error, setError] = useState('');
+    const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
     const navigate = useNavigate()
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
         setError('');
-
+        if (!agreeToPrivacy) {
+            setError('Необходимо согласие на обработку персональных данных');
+            return;
+        }
         const result = await register(email, password, repeatPassword);
 
         if(result?.success)
@@ -47,6 +51,23 @@ export default function Register() {
                         <input type="password" value={repeatPassword}
                          disabled={isLoading} required onChange={(e) => {setRepeatPassword(e.target.value)}}/>
                     </div> 
+                    <div className={classes.checkbox_group}>
+                        <label className={classes.checkbox_label}>
+                            <input
+                                type="checkbox"
+                                checked={agreeToPrivacy}
+                                onChange={(e) => setAgreeToPrivacy(e.target.checked)}
+                                disabled={isLoading}
+                                required
+                            />
+                            <span>
+                                Я принимаю условия{' '}
+                                <Link to="/privacy-policy" target="_blank" className={classes.privacy_link}>
+                                    политики обработки персональных данных
+                                </Link>
+                            </span>
+                        </label>
+                    </div>
                     <button type="submit" disabled={isLoading} className={classes.submit_btn}>
                         {isLoading ? "Регистрация.." : "Зарегистрироваться"}
                     </button>  

@@ -1,4 +1,5 @@
 ﻿using Backend.Models.Entities;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Backend.Interfaces
 {
@@ -12,6 +13,9 @@ namespace Backend.Interfaces
         public Task<Booking?> GetByIdAsync(int id);
         public Task UpdateAsync(Booking booking);
         public Task<bool> DeleteAsync(int id);
+        public Task<Booking?> GetByTicketNumberAsync(string ticketNumber);
+        public Task CreateTicketAsync(Ticket ticket);
+        public Task<IDbContextTransaction> BeginTransactionAsync();
         public Task SaveChangesAsync();
     }
 }

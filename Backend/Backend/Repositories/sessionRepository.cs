@@ -25,6 +25,8 @@ namespace Backend.Repositories
                 .Include(s => s.Movie)
                 .Include(s => s.Hall)
                 .Include(s => s.Bookings)
+                    .ThenInclude(b => b.Status)
+                .Include(s => s.Bookings)
                     .ThenInclude(b => b.BookingSeats)
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
@@ -37,7 +39,7 @@ namespace Backend.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> IsHallAvailable(int id, DateTime startTime, DateTime endTime)
+        public async Task<bool> IsHallAvailable(int id, DateTime startTime, DateTime endTime, int? excludeSessionId)
         {
             const int preparationMinutes = 30;
 
@@ -45,11 +47,17 @@ namespace Backend.Repositories
             var adjustedStartTime = startTime - preparationTime;
             var adjustedEndTime = endTime + preparationTime;
 
-            return await _context.Sessions
+            var query = _context.Sessions
                 .Where(s => s.HallId == id
-                        && s.StartTime < adjustedEndTime
-                        && s.EndTime > adjustedStartTime)
-                .CountAsync() == 0;
+                    && s.StartTime < adjustedEndTime
+                    && s.EndTime > adjustedStartTime);
+
+            if (excludeSessionId.HasValue)
+            {
+                query = query.Where(s => s.Id != excludeSessionId.Value);
+            }
+
+            return await query.CountAsync() == 0;
         }
 
         public async Task SaveChangesAsync()

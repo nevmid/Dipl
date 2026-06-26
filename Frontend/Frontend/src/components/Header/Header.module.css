@@ -13,6 +13,13 @@
     padding-left: 50px;
     padding-right: 50px;
     height: 70px;
+    top: 0;
+    z-index: 1000;
+    position: sticky;
+}
+
+.header > div:first-child {
+    flex-shrink: 0;
 }
 
 .navigation{
@@ -23,6 +30,10 @@
     
     font-weight: 300;
     font-size: 20px;
+}
+
+.header > div:last-child {
+    flex-shrink: 0;
 }
 
 .navigation ul{
@@ -39,6 +50,10 @@
     text-decoration: none;
     position: relative;
     font-weight: 600;
+}
+
+.navigation li:nth-child(4){
+    display: none;
 }
 
 .navigation li a:hover{
@@ -145,4 +160,194 @@
 .acc_img:hover{
     transform: scale(1.1);
     box-shadow: 0 0 3px rgb(255, 255, 255)
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.menu span {
+    width: 30px;
+    height: 3px;
+    background: white;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media (max-width: 1024px) {
+    .header {
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 24px;
+    }
+    
+    .navigation ul {
+        gap: 20px;
+    }
+    
+    .navigation {
+        font-size: 18px;
+    }
+    
+    .reg_btn, .login_btn, .admin_btn {
+        font-size: 12pt;
+        padding: 5px 10px;
+    }
+    
+    .user_menu {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 60px;
+        font-size: 20px;
+        position: relative;
+        justify-content: center;
+    }
+    
+    .menu {
+        display: flex;
+        position: absolute;
+        left: 20px;
+    }
+    
+    .navigation {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: rgba(10, 10, 26, 0.98);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 30px 20px;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .header > div:last-child {
+        position: absolute;
+        right: 20px;
+    }
+
+    .header > div:first-child {
+        position: relative;
+    }
+    
+    .navigation.open {
+        left: 0;
+    }
+    
+    .navigation ul {
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
+    }
+    
+    .navigation li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .navigation li a {
+        display: block;
+        padding: 10px;
+        font-size: 20px;
+    }
+    
+    .auth_btns {
+        gap: 3px;
+    }
+    
+    .reg_btn, .login_btn {
+        font-size: 11pt;
+        padding: 5px 10px;
+    }
+
+    .reg_btn{
+        display: none;
+    }
+    
+    .user_menu {
+        gap: 15px;
+    }
+    
+    .admin_btn {
+        font-size: 11pt;
+        padding: 5px 10px;
+    }
+    
+    .acc_img {
+        width: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding-left: 15px;
+        padding-right: 15px;
+        height: 55px;
+        font-size: 18px;
+    }
+    
+    .menu span {
+        width: 25px;
+        height: 2.5px;
+    }
+    
+    .navigation {
+        top: 55px;
+        height: calc(100vh - 55px);
+        padding: 20px 15px;
+    }
+    
+    .navigation ul {
+        gap: 20px;
+    }
+    
+    .navigation li a {
+        font-size: 18px;
+        padding: 8px;
+    }
+    
+    .reg_btn, .login_btn, .admin_btn {
+        font-size: 10pt;
+        padding: 4px 8px;
+    }
+
+    .reg_btn, .admin_btn{
+        display: none;
+    }
+    
+    .navigation li:nth-child(4){
+        display: inline-block;
+    }
+
+    .acc_img {
+        width: 32px;
+    }
+    
+    .user_menu {
+        gap: 10px;
+    }
 }

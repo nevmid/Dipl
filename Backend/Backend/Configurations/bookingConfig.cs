@@ -23,17 +23,23 @@ namespace Backend.Configurations
                 .HasColumnName("session_id")
                 .IsRequired();
 
-            builder.Property(b => b.Status)
-                .HasColumnName("status")
-                .HasMaxLength(20)
-                .HasDefaultValue("pending")
-                .HasAnnotation("CheckConstraint",
-                "status IN ('pending', 'confirmed', 'cancelled')");
+            builder.Property(b => b.StatusId)
+                .HasColumnName("status_id")
+                .HasDefaultValue(1)
+                .IsRequired();
 
             builder.Property(b => b.TotalAmount)
                 .HasColumnName("total_amount")
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
+
+            builder.Property(b => b.FinalAmount)
+                .HasColumnName("final_amount")
+                .HasColumnType("decimal(10,2)")
+                .IsRequired();
+
+            builder.Property(b => b.BonusUsed)
+                .HasColumnName("bonus_used");
 
             builder.Property(b => b.CreatedAt)
                 .HasColumnName("created_at")
@@ -58,6 +64,16 @@ namespace Backend.Configurations
             builder.HasOne(b => b.Payment)
                 .WithOne(p => p.Booking)
                 .HasForeignKey<Payment>(p => p.BookingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(b => b.Status)
+                .WithMany(s => s.Bookings)
+                .HasForeignKey(b => b.StatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(b => b.Ticket)
+                .WithOne(t => t.Booking)
+                .HasForeignKey<Ticket>(t => t.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

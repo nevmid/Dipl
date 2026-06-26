@@ -1,0 +1,346 @@
+.container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+}
+
+.header {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.header h3 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.halls_section {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(26, 26, 53, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.halls_section h4 {
+    color: #00F5FF;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.halls_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 500px;
+}
+
+.hall_btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(10, 10, 26, 0.8);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.hall_btn:hover {
+    border-color: rgba(0, 245, 255, 0.5);
+    transform: translateX(5px);
+}
+
+.hall_btn.active {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: #00F5FF;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+}
+
+.hall_name {
+    color: white;
+    font-weight: 600;
+}
+
+.hall_schema {
+    color: #00F5FF;
+    font-size: 12px;
+}
+
+.empty_halls {
+    text-align: center;
+    padding: 40px;
+    color: #C0C0E0;
+}
+
+.schedule_section {
+    flex: 3;
+    min-width: 500px;
+    background: rgba(26, 26, 53, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.schedule_section h4 {
+    color: #00F5FF;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.sessions_list {
+    max-height: 400px;
+    margin-bottom: 30px;
+    padding-right: 10px;
+    overflow-y: auto;
+}
+
+.session_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(10, 10, 26, 0.8);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.session_card:hover {
+    transform: translateX(5px);
+    background: rgba(10, 10, 26, 0.9);
+}
+
+.session_time {
+    min-width: 160px;
+}
+
+.date {
+    color: #00F5FF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.session_info {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie_title {
+    color: white;
+    font-weight: 500;
+}
+
+.session_price {
+    color: #FFD966;
+    font-weight: 600;
+}
+
+.session_actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit_btn, .delete_btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.edit_btn {
+    color: #00F5FF;
+}
+
+.edit_btn:hover {
+    background: rgba(0, 245, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.delete_btn {
+    color: #FF6B6B;
+}
+
+.delete_btn:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(1.05);
+}
+
+.empty_sessions {
+    text-align: center;
+    padding: 40px;
+    color: #C0C0E0;
+}
+
+.form_section {
+    background: rgba(10, 10, 26, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(0, 245, 255, 0.2);
+    flex: 1;
+}
+
+.form_section h4 {
+    color: #00F5FF;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form_group label {
+    color: #C0C0E0;
+    font-size: 14px;
+}
+
+.form_group select,
+.form_group input {
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.form_group select:focus,
+.form_group input:focus {
+    outline: none;
+    border-color: #00F5FF;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.form_group select option {
+    background: #1A1A35;
+    color: white;
+}
+
+.form_buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.save_btn, .cancel_btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.save_btn {
+    background: #00F5FF;
+    color: #0A0A1A;
+    flex: 1;
+}
+
+.save_btn:hover {
+    background: #33F8FF;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+.cancel_btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel_btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.loading_spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    color: white;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.sessions_list::-webkit-scrollbar-thumb {
+    background: whitesmoke;
+    border-radius: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .content {
+        flex-direction: column;
+    }
+    
+    .halls_section {
+        min-width: auto;
+    }
+    
+    .schedule_section {
+        min-width: auto;
+    }
+    
+    .session_card {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .session_info {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .form_buttons {
+        flex-direction: column;
+    }
+}

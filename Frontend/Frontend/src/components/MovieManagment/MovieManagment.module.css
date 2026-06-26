@@ -1,0 +1,488 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+    gap: 20px;
+    width: 100%;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    text-align: center;
+    background: rgba(255, 69, 0, 0.15);
+    border: 1px solid rgba(255, 69, 0, 0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 20px;
+}
+
+.error p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.manage_section{
+    margin-top : 20px;
+    background: transparent;
+    display: flex;
+    width: 100%;
+    /* margin: 0 10px; */
+    padding: 0 10px;
+}
+
+.movies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.movies_list{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.movies_list h3 {
+    color: #00F5FF;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.list_item{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: flex-end; 
+    
+    background-color: #1F1F1F;
+    /* border: 2px solid #00F5FF; */
+    border-radius: 5px;
+    
+    width: 190px;
+    height: 290px;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.list_item::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 5px;
+}
+
+.list_item h2{
+    color: whitesmoke;;
+    background: none;
+    z-index: 1;
+    font-size: 12pt;
+    font-weight: 600;
+    text-align: center;
+    padding: 0;
+}
+
+.edit_btn, .delete_btn{
+    background: #00ccff;
+    color: #000000;
+    z-index: 1;
+    text-decoration: none;
+    margin-bottom: 4px;
+    font-size: 12pt;
+    /* font-weight: 600; */
+    padding: 4px 10px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.1s ease;
+}
+
+.delete_btn {
+    background: #bd3300;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.edit_btn:hover, .delete_btn:hover {
+    transform: translateY(-1px);
+}
+
+.add_movie_section{
+    background: rgba(26, 26, 53, 0.8);
+    flex: 1;
+    top: 100px;
+}
+
+.add_movie_section h3 {
+    color: #00F5FF;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload_method {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.upload_method label {
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form_add_movie {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form_add_movie input,
+.form_add_movie textarea {
+    padding: 12px;
+    background: rgba(10, 10, 26, 0.8);
+    border: none;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.form_add_movie input:focus,
+.form_add_movie textarea:focus {
+    outline: none;
+    border-color: #00F5FF;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.form_add_movie input[type="file"] {
+    padding: 8px;
+    background: rgba(10, 10, 26, 0.8);
+}
+
+.add_btn {
+    width: 100%;
+    padding: 12px;
+    background: #00ccff;
+    color: #0A0A1A;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.add_btn:hover {
+    background: #33F8FF;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+.genres_section {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.genres_label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.selected_genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.genre_tag {
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove_genre {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 4px;
+}
+
+.remove_genre:hover {
+    opacity: 0.8;
+}
+
+.genre_input_container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.genre_input {
+    flex: 1;
+    padding: 12px;
+    background: rgba(10, 10, 26, 0.8);
+    border: none;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.genre_input:focus{
+    outline: none;
+    border-color: #00F5FF;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.add_genre_btn {
+    padding: 8px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add_genre_btn:hover {
+    background: #218838;
+}
+
+.genre_dropdown {
+    position: relative;
+    background: rgb(10, 10, 26);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+    width: calc(100% - 100px);
+}
+
+.genre_option {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.genre_option:hover {
+    background: #626262;
+}
+
+@media (max-width: 1024px) {
+    .manage_section {
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .movies_list {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .movies {
+        justify-content: center;
+    }
+    
+    .add_movie_section {
+        width: 100%;
+        position: static;
+        margin-bottom: 30px;
+    }
+    
+    .list_item {
+        width: 170px;
+        height: 260px;
+    }
+    
+    .list_item h2 {
+        font-size: 10pt;
+    }
+    
+    .edit_btn, .delete_btn {
+        font-size: 10pt;
+        padding: 3px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+        text-align: center;
+        padding: 0 15px;
+    }
+    
+    .manage_section {
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .movies_list {
+        width: 100%;
+    }
+    
+    .movies_list h3 {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .movies {
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .list_item {
+        width: 150px;
+        height: 230px;
+    }
+    
+    .list_item h2 {
+        font-size: 9pt;
+        margin-bottom: 5px;
+    }
+    
+    .edit_btn, .delete_btn {
+        font-size: 9pt;
+        padding: 3px 8px;
+        margin-bottom: 6px;
+    }
+    
+    .add_movie_section {
+        position: static;
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .add_movie_section h3 {
+        font-size: 20px;
+    }
+    
+    .upload_method {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .form_add_movie input,
+    .form_add_movie textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .add_btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+        margin-top: 70px;
+    }
+    
+    .movies_list h3 {
+        font-size: 18px;
+    }
+    
+    .movies {
+        gap: 10px;
+    }
+    
+    .list_item {
+        width: 130px;
+        height: 200px;
+    }
+    
+    .list_item h2 {
+        font-size: 8pt;
+    }
+    
+    .edit_btn, .delete_btn {
+        font-size: 8pt;
+        padding: 2px 6px;
+        margin-bottom: 4px;
+    }
+    
+    .add_movie_section {
+        padding: 12px;
+    }
+    
+    .add_movie_section h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .upload_method {
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .upload_method label {
+        font-size: 13px;
+    }
+    
+    .form_add_movie {
+        gap: 8px;
+    }
+    
+    .form_add_movie input,
+    .form_add_movie textarea {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .add_btn {
+        padding: 8px;
+        font-size: 13px;
+        margin: 10px 0;
+    }
+}

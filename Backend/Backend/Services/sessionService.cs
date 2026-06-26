@@ -37,7 +37,7 @@ namespace Backend.Services
                 var endTime = dto.StartTime.AddMinutes(movie.Duration);
 
                 bool isHallAvailable =
-                    await _sessionRepository.IsHallAvailable(dto.HallId, dto.StartTime, endTime);
+                    await _sessionRepository.IsHallAvailable(dto.HallId, dto.StartTime, endTime, null);
 
                 if (!isHallAvailable)
                     throw new ValidationException("Зал занят в выбранное время");
@@ -59,7 +59,7 @@ namespace Backend.Services
             }
         }
 
-        public async Task<List<sessionsResponseDto>> GetAll(DateTime? date)
+        public async Task<List<sessionsResponseDto>> GetAll(DateTime? date, int? hallId)
         {
             try
             {
@@ -68,6 +68,10 @@ namespace Backend.Services
                 if (date != null)
                 {
                     sessions = sessions.Where(s => s.StartTime.Date == date.Value.Date).ToList();
+                }
+                if (hallId != null)
+                {
+                    sessions = sessions.Where(s => s.HallId == hallId).ToList();
                 }
 
                 var response = sessions
@@ -128,7 +132,7 @@ namespace Backend.Services
                 if (session == null)
                     return null;
 
-                if (session.Bookings.Any(b => b.Status != "cancelled"))
+                if (session.Bookings.Any(b => b.Status.Name != "cancelled"))
                     throw new InvalidOperationException(
                         "Нельзя редактировать сеанс: уже есть бронирования");
 
@@ -143,7 +147,7 @@ namespace Backend.Services
                 var endTime = dto.StartTime.AddMinutes(movie.Duration);
 
                 bool isHallAvailable =
-                    await _sessionRepository.IsHallAvailable(dto.HallId, dto.StartTime, endTime);
+                    await _sessionRepository.IsHallAvailable(dto.HallId, dto.StartTime, endTime, id);
 
                 if (!isHallAvailable)
                     throw new ValidationException("Зал занят в выбранное время");

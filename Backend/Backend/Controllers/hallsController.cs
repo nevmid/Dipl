@@ -71,11 +71,11 @@ namespace Backend.Controllers
             }
             catch(ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new {success = false, message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Create Hall");
+                return StatusCode(500, new { success = false, message = "Server Error | Create Hall" });
             }
         }
 
@@ -93,7 +93,7 @@ namespace Backend.Controllers
                 var hall = await _hallService.UpdateHall(id, request);
 
                 if (hall == null)
-                    return BadRequest(new { message = "Зал не найден" });
+                    return BadRequest(new { success = false, message = "Зал не найден" });
 
                 return Ok(new
                 {
@@ -101,13 +101,17 @@ namespace Backend.Controllers
                     hall
                 });
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { success = false, message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Update Hall");
+                return StatusCode(500, new { success = false, message = "Server Error | Update Hall" });
             }
         }
 
@@ -128,9 +132,17 @@ namespace Backend.Controllers
                     success
                 });
             }
-            catch (Exception)
+            catch (InvalidOperationException ex)
             {
-                return StatusCode(500, "Server Error | Delete Hall");
+                return BadRequest(new
+                {
+                    success = false,
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
             }
         }
     }

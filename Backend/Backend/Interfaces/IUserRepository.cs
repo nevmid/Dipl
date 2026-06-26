@@ -1,4 +1,5 @@
-﻿using Backend.Models.Entities;
+﻿using Backend.Models.DTOs.UserDTOs;
+using Backend.Models.Entities;
 
 namespace Backend.Interfaces
 {
@@ -9,9 +10,11 @@ namespace Backend.Interfaces
         public Task<bool> EmailExistAsync(string email);
         public Task<User?> GetUserByEmail(string email);
         public Task<User?> GetUserById(int id);
-        public Task<(List<User> users, int totalCount)> GetUsers(int page, int pageSize);
-        public Task<List<User>> SearchUsers(string search, int limit);
+        public Task<(List<UserDto> users, int totalCount)> GetUsers(int page, int pageSize);
+        public Task<List<UserDto>> SearchUsers(string search, int limit);
         public Task DeleteUser(User user);
         public Task SaveChangesAsync();
+        public Task<int> GetRoleIdByName(string roleName);
+        public Task<string?> GetRoleNameById(int roleId);
     }
 }

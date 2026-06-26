@@ -70,3 +70,84 @@
 .nav_btn:hover{
     background: #4D9EFF;
 }
+
+@media (max-width: 1024px) {
+    .main_container {
+        padding: 30px;
+    }
+    
+    .admin_panel h2 {
+        font-size: 18pt;
+        margin: 12px 0;
+    }
+    
+    .nav {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .nav_btn {
+        padding: 4px 8px;
+        font-size: 11pt;
+    }
+}
+
+@media (max-width: 768px) {
+    .main_container {
+        padding: 20px;
+    }
+    
+    .admin_panel {
+        border-radius: 15px;
+    }
+    
+    .admin_panel h2 {
+        font-size: 16pt;
+        margin: 10px 0;
+    }
+    
+    .nav {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+        gap: 8px;
+        border-radius: 8px;
+    }
+    
+    .nav_btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 12pt;
+        border-radius: 8px;
+    }
+    
+    .nav_btn:hover {
+        background: #4D9EFF;
+    }
+}
+
+@media (max-width: 480px) {
+    .main_container {
+        padding: 12px;
+    }
+    
+    .admin_panel {
+        border-radius: 12px;
+    }
+    
+    .admin_panel h2 {
+        font-size: 14pt;
+        margin: 8px 0;
+    }
+    
+    .nav {
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .nav_btn {
+        padding: 8px 10px;
+        font-size: 11pt;
+    }
+}

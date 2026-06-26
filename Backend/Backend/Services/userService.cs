@@ -90,7 +90,7 @@ namespace Backend.Services
             }
         }
 
-        public async Task<bool> ChangeRole(int id, ChangeRoleDto changeRoleDto)
+        public async Task<(bool, string?)> ChangeRole(int id, ChangeRoleDto changeRoleDto)
         {
             try
             {
@@ -98,25 +98,27 @@ namespace Backend.Services
 
                 if (user == null)
                 {
-                    return false;
+                    return (false, null);
                 }
 
-                List<string> roles = ["admin", "user"];
+                List<string> roles = ["admin", "user", "staff"];
 
-                if(!roles.Contains(changeRoleDto.Role))
+                if(!roles.Contains(changeRoleDto.Role.ToLower()))
                 {
                     throw new ValidationException($"Роль {changeRoleDto.Role} не существует");
                 }
 
-                if (user.Role == changeRoleDto.Role)
+                var roleId = await _userRepository.GetRoleIdByName(changeRoleDto.Role.ToLower());
+
+                if (user.RoleId == roleId)
                 {
-                    return true;
+                    return (true, user.Email);
                 }
 
-                user.Role = changeRoleDto.Role;
+                user.RoleId = roleId;
 
                 await _userRepository.SaveChangesAsync();
-                return true;
+                return (true, user.Email);
 
             }
             catch (Exception)
@@ -138,11 +140,13 @@ namespace Backend.Services
 
                 await _userRepository.DeleteUser(user);
 
+                var roleName = await _userRepository.GetRoleNameById(user.RoleId);
+
                 var respone = new UserDto
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    Role = user.Role,
+                    Role = roleName!,
                     CreatedAt = user.CreatedAt,
                     loyaltyAccount = user.LoyaltyAccount
                 };
@@ -167,11 +171,13 @@ namespace Backend.Services
                     return null;
                 }
 
+                var roleName = await _userRepository.GetRoleNameById(user.RoleId);
+
                 var respone = new UserDto
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    Role = user.Role,
+                    Role = roleName!,
                     CreatedAt = user.CreatedAt,
                     loyaltyAccount = user.LoyaltyAccount
                 };
@@ -214,16 +220,7 @@ namespace Backend.Services
 
                 var (users, totalCount) = await _userRepository.GetUsers(page, pageSize);
 
-                List<UserDto> response = users.Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Email = u.Email,
-                    Role = u.Role,
-                    CreatedAt = u.CreatedAt,
-                    loyaltyAccount = u.LoyaltyAccount
-                }).ToList();
-
-                return (response, totalCount);
+                return (users, totalCount);
             }
             catch (Exception)
             {
@@ -292,16 +289,7 @@ namespace Backend.Services
 
                 var users = await _userRepository.SearchUsers(query, limit);
 
-                List<UserDto> response = users.Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Email = u.Email,
-                    Role = u.Role,
-                    CreatedAt = u.CreatedAt,
-                    loyaltyAccount = u.LoyaltyAccount
-                }).ToList();
-
-                return response;
+                return users;
             }
             catch (Exception)
             {

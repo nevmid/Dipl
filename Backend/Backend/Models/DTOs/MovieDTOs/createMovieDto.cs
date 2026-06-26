@@ -13,21 +13,24 @@ namespace Backend.Models.DTOs.MovieDTOs
         [Required]
         public string Description { get; set; } = string.Empty;
         [Required]
-        [Range(1888, 2100)] 
+        [Range(1888, 2500)] 
         public int Year { get; set; }
         [Required]
         [Range(1, 1000)]
         public int Duration { get; set; }
+        [Required]
+        [Range(0, 100)]
+        public int Age { get; set; }
         [Url]
         [DataType(DataType.ImageUrl)]
         public string? PosterUrl { get; set; }
         [DataType(DataType.Upload)]
         public IFormFile? PosterFile {  get; set; }
+        [Required(ErrorMessage = "Жанры обязательны")]
+        [MinLength(1, ErrorMessage = "Выберите хотя бы один жанр")]
+        public List<string> Genres { get; set; } = [];
         [Required]
         [Url]
         public string TrailerUrl { get; set; } = string.Empty;
-        [Required]
-        [Range(0, 10)]
-        public double Rating { get; set; }
     }
 }

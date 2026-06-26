@@ -1,0 +1,638 @@
+/* ProfilePage.module.css */
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0A0A1A 0%, #1A1A35 100%);
+    padding: 100px 40px 40px;
+}
+
+.profileWrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.profileInfo {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(26, 26, 53, 0.8);
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    height: fit-content;
+}
+
+.profileInfo h2 {
+    color: #00F5FF;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.email {
+    color: #C0C0E0;
+    margin-bottom: 10px;
+}
+
+.role {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(0, 245, 255, 0.1);
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statValue {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00F5FF;
+}
+
+.statLabel {
+    font-size: 12px;
+    color: #C0C0E0;
+}
+
+.accountActions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.actionBtn {
+    padding: 12px 20px;
+    background: rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 10px;
+    color: #00F5FF;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.actionBtn:hover {
+    background: rgba(0, 245, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.logoutBtn {
+    padding: 12px 20px;
+    background: rgba(255, 217, 102, 0.1);
+    border: 1px solid rgba(255, 217, 102, 0.3);
+    border-radius: 10px;
+    color: #FFD966;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 217, 102, 0.2);
+    transform: translateY(-2px);
+}
+
+.deleteBtn {
+    padding: 12px 20px;
+    background: rgba(255, 69, 0, 0.1);
+    border: 1px solid rgba(255, 69, 0, 0.3);
+    border-radius: 10px;
+    color: #FF6B6B;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+    background: rgba(255, 69, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.bookingsHistory {
+    flex: 2;
+    min-width: 400px;
+}
+
+.bookingsHistory h3 {
+    color: #00F5FF;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.bookingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.bookingCard {
+    background: rgba(26, 26, 53, 0.6);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.bookingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.movieInfo h4 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.movieDetails {
+    color: #C0C0E0;
+    font-size: 12px;
+}
+
+.statusBadge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.statusPending {
+    background: rgba(255, 217, 102, 0.2);
+    color: #FFD966;
+}
+
+.statusConfirmed {
+    background: rgba(0, 245, 255, 0.2);
+    color: #00F5FF;
+}
+
+.statusCancelled {
+    background: rgba(255, 69, 0, 0.2);
+    color: #FF6B6B;
+}
+
+.statusExpired {
+    background: rgba(128, 128, 160, 0.2);
+    color: #8080A0;
+}
+
+.bookingDetails {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.detailRow {
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.detailRow span {
+    color: #C0C0E0;
+}
+
+.detailRow strong {
+    color: white;
+}
+
+.ticketBtn, .payBtn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+}
+
+.ticketBtn {
+    background: #00F5FF;
+    color: #0A0A1A;
+}
+
+.ticketBtn:hover {
+    background: #33F8FF;
+    transform: translateY(-2px);
+}
+
+.payBtn {
+    background: #FFD966;
+    color: #0A0A1A;
+}
+
+.payBtn:hover {
+    background: #FFE080;
+    transform: translateY(-2px);
+}
+
+.emptyHistory {
+    text-align: center;
+    padding: 60px;
+    background: rgba(26, 26, 53, 0.6);
+    border-radius: 20px;
+}
+
+.emptyHistory p {
+    color: #C0C0E0;
+    margin-bottom: 20px;
+}
+
+.buyBtn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #00F5FF;
+    color: #0A0A1A;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.buyBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+}
+
+.refundBtn, .cancelBtn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    background: rgba(255, 107, 107, 0.2);
+    color: #FF6B6B;
+    border: 1px solid #FF6B6B;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.refundBtn:hover, .cancelBtn:hover {
+    background: #FF6B6B;
+    color: #0A0A1A;
+    transform: translateY(-2px);
+}
+
+.bonusSection {
+    background: rgba(0, 245, 255, 0.05);
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.bonusHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bonusValue {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD966;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+}
+
+.modalContent {
+    background: linear-gradient(135deg, #1A1A35, #0A0A1A);
+    border-radius: 30px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    border: 1px solid #00F5FF;
+    box-shadow: 0 0 50px rgba(0, 245, 255, 0.3);
+}
+
+.modalClose {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #C0C0E0;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modalClose:hover {
+    color: #00F5FF;
+    transform: scale(1.1);
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modalForm input {
+    padding: 12px;
+    background: rgba(10, 10, 26, 0.8);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.modalForm input:focus {
+    outline: none;
+    border-color: #00F5FF;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+
+.modalButtons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.saveBtn, .cancelBtn, .deleteConfirmBtn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.saveBtn {
+    background: #00F5FF;
+    color: #0A0A1A;
+}
+
+.saveBtn:hover {
+    background: #33F8FF;
+    transform: translateY(-2px);
+}
+
+.cancelBtn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancelBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.deleteConfirmBtn {
+    background: #FF4500;
+    color: white;
+}
+
+.deleteConfirmBtn:hover {
+    background: #FF6347;
+    transform: translateY(-2px);
+}
+
+.ticketContainer {
+    text-align: center;
+}
+
+.ticketHeader {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px dashed rgba(0, 245, 255, 0.3);
+}
+
+.ticketHeader h3 {
+    color: #00F5FF;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.ticketHeader p {
+    color: #C0C0E0;
+    font-size: 12px;
+}
+
+.ticketInfo {
+    margin-bottom: 10px;
+}
+
+.ticketMovie h4 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.ticketMovie p {
+    color: #C0C0E0;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.ticketDetails {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.ticketRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+}
+
+.ticketRow:last-child {
+    border-bottom: none;
+}
+
+.ticketRow span {
+    color: #C0C0E0;
+}
+
+.ticketRow strong {
+    color: #00F5FF;
+}
+
+.qrSection {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.qrCode {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.qrPlaceholder {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.qrPlaceholder span {
+    font-size: 64px;
+}
+
+.qrPlaceholder p {
+    color: #C0C0E0;
+    font-size: 12px;
+}
+
+.ticketNumber {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #C0C0E0;
+    letter-spacing: 1px;
+}
+
+.ticketFooter {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px dashed rgba(0, 245, 255, 0.3);
+    font-size: 12px;
+    color: #C0C0E0;
+}
+
+.downloadBtn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #00F5FF;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+    background: #33F8FF;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 80px 20px 30px;
+    }
+    
+    .profileWrapper {
+        flex-direction: column;
+    }
+    
+    .bookingsHistory {
+        min-width: auto;
+    }
+    
+    .bookingHeader {
+        flex-direction: column;
+    }
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 245, 255, 0.3);
+    border-top-color: #00F5FF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.notAuth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0A0A1A;
+    color: white;
+    text-align: center;
+}
+
+.notAuth h2 {
+    color: #00F5FF;
+    margin-bottom: 15px;
+}
+
+.notAuth p {
+    margin-bottom: 20px;
+}
+
+.loginBtn {
+    padding: 10px 30px;
+    background: #00F5FF;
+    color: #0A0A1A;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+}

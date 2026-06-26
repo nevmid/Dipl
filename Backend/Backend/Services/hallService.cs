@@ -25,14 +25,14 @@ namespace Backend.Services
                 if (string.IsNullOrEmpty(dto.Name))
                     throw new ValidationException("Название зала обязательно");
 
-                var hallExist = await _hallRepository.HallIsExist(dto.Name.Trim().ToLower());
+                var hallExist = await _hallRepository.HallIsExist(dto.Name.Trim().ToLower(), null);
 
                 if (hallExist)
                     throw new ValidationException("Зал с таким названием уже существует");
 
                 var hall = new Hall
                 {
-                    Name = dto.Name.Trim().ToLower(),
+                    Name = dto.Name.Trim(),
                     Description = dto.Description ?? string.Empty
                 };
 
@@ -73,6 +73,12 @@ namespace Backend.Services
                 if (hall == null)
                     return false;
 
+                var hasSessions = await _hallRepository.HasActiveSessions(id);
+                if (hasSessions)
+                {
+                    throw new InvalidOperationException("Невозможно удалить зал с активными сеансами");
+                }
+
                 _hallRepository.DeleteHall(hall);
                 await _hallRepository.SaveChangesAsync();
 
@@ -98,13 +104,21 @@ namespace Backend.Services
             }
         }
 
-        public async Task<List<Hall>> GetHalls()
+        public async Task<List<ResponseHallDto>> GetHalls()
         {
             try
             {
                 var halls = await _hallRepository.GetHalls();
 
-                return halls;
+                return halls.Select(hall => new ResponseHallDto
+                {
+                    Id = hall.Id,
+                    Name = hall.Name,
+                    Description = hall.Description,
+                    Rows = hall.Seats?.Select(s => s.RowNum).Distinct().Count() ?? 0,
+                    Cols = hall.Seats?.Select(s => s.ColNum).Distinct().Count() ?? 0,
+                    SessionsCount = hall.Sessions?.Count(s => s.StartTime > DateTime.UtcNow) ?? 0,
+                }).ToList();
             }
             catch (Exception)
             {
@@ -119,19 +133,23 @@ namespace Backend.Services
                 if (string.IsNullOrEmpty(dto.Name))
                     throw new ValidationException("Название зала обязательно");
 
-
-
-                var hallExist = await _hallRepository.HallIsExist(dto.Name.Trim().ToLower());
+                var hallExist = await _hallRepository.HallIsExist(dto.Name.Trim().ToLower(), id);
 
                 if (hallExist)
                     throw new ValidationException("Зал с таким названием уже существует");
 
                 var hall = await _hallRepository.GetHallById(id);
 
-                if(hall == null)
+                var hasSessions = await _hallRepository.HasActiveSessions(id);
+                if (hasSessions)
+                {
+                    throw new InvalidOperationException("Невозможно изменить зал с активными сеансами");
+                }
+
+                if (hall == null)
                     return null;
 
-                hall.Name = dto.Name;
+                hall.Name = dto.Name.Trim();
                 hall.Description = dto.Description ?? string.Empty;
 
                 await _seatRepository.DeleteSeats(id);

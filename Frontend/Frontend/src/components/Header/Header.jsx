@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-// import { useState } from "react"
+import { useState } from "react"
 import classes from './Header.module.css'
 import account from '../../assets/logoaccount.svg'
 import { useAuth } from '../../../contexts/AuthContext'
@@ -8,10 +8,19 @@ import { useLocation } from "react-router-dom"
 export default function Header(){
     const {isAuthenticated, isAdmin, logout} = useAuth()
     const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const noHeader = ['/login', '/register'];
     const hideMovieInfo = location.pathname.startsWith("/movies/");
     const hide = noHeader.includes(location.pathname) || hideMovieInfo;
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
+    const closeMenu = () => {
+        setIsMenuOpen(false)
+    }
 
     if(hide)
         return null;
@@ -21,12 +30,21 @@ export default function Header(){
             <div>
                 Space<span className={classes.logo_cinema}>Cinema</span>
             </div>
-            <nav className={classes.navigation}>
+            <div className={`${classes.menu} ${isMenuOpen ? classes.active : ''}`} onClick={toggleMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav className={`${classes.navigation} ${isMenuOpen ? classes.open : ''}`}>
                 <ul>
-                    {/* <li><Link to="/">Главная</Link></li> */}
+                    <li><Link to="/home">Главная</Link></li>
                     <li><Link to="/">Расписание</Link></li>
                     <li><Link to="/movies">Афиша</Link></li>
-                    {/* <li><Link to="/bar">Кино-бар</Link></li> */}
+                    {isAdmin && (
+                        <li>
+                            <Link to="/admin">Админка</Link>
+                        </li>
+                    )}
                 </ul>
             </nav>
             <div>
@@ -37,7 +55,7 @@ export default function Header(){
                             Админка
                         </Link>
                     )}
-                    <Link to="/profile" className={classes.profile} onClick={() => {logout()}}>
+                    <Link to="/profile" className={classes.profile}>
                         <img src={account} alt="account" className={classes.acc_img}/>
                     </Link>
                 </div>

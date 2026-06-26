@@ -122,3 +122,149 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 1024px) {
+    .main {
+        padding: 30px;
+    }
+    
+    .main_list h2 {
+        font-size: 24pt;
+    }
+    
+    .list {
+        gap: 30px;
+    }
+    
+    .list_item {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .list_item h2 {
+        font-size: 20pt;
+    }
+    
+    .list_item h4 {
+        font-size: 14px;
+    }
+    
+    .list_item .info {
+        font-size: 12pt;
+        padding: 6px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 20px;
+    }
+    
+    .main_list h2 {
+        font-size: 20pt;
+        padding: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .list {
+        gap: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .list_item {
+        width: 200px;
+        height: 280px;
+        border-width: 1.5px;
+    }
+    
+    .list_item h2 {
+        font-size: 16pt;
+        margin-bottom: 5px;
+    }
+    
+    .list_item h4 {
+        font-size: 12px;
+        margin: 0 8px 10px;
+    }
+    
+    .list_item .info {
+        font-size: 10pt;
+        padding: 5px 12px;
+        margin-bottom: 15px;
+    }
+    
+    .loading p {
+        font-size: 14px;
+    }
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 12px;
+    }
+    
+    .main_list h2 {
+        font-size: 18pt;
+        padding: 8px;
+        padding-bottom: 12px;
+    }
+    
+    .list {
+        gap: 15px;
+    }
+    
+    .list_item {
+        width: 160px;
+        height: 240px;
+        border-radius: 12px;
+    }
+    
+    .list_item::before {
+        border-radius: 12px;
+    }
+    
+    .list_item h2 {
+        font-size: 14pt;
+    }
+    
+    .list_item h4 {
+        font-size: 10px;
+        margin: 0 5px 8px;
+    }
+    
+    .list_item .info {
+        font-size: 9pt;
+        padding: 4px 10px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .list {
+        gap: 12px;
+    }
+    
+    .list_item {
+        width: 140px;
+        height: 210px;
+    }
+    
+    .list_item h2 {
+        font-size: 12pt;
+    }
+    
+    .list_item h4 {
+        font-size: 9px;
+    }
+    
+    .list_item .info {
+        font-size: 8pt;
+        padding: 3px 8px;
+    }
+}

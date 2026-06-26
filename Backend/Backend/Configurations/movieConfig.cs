@@ -38,15 +38,14 @@ namespace Backend.Configurations
                 .HasAnnotation("CheckConstraint", "duration > 0 AND duration <= 1000")
                 .IsRequired();
 
+            builder.Property(m => m.Age)
+                .HasColumnName("age")
+                .HasAnnotation("CheckConstraint", "age > 0 AND age <= 100")
+                .IsRequired();
+
             builder.Property(m => m.PosterUrl)
                 .HasColumnName("poster_url")
                 .HasDefaultValue("/uploads/posters/default.png");
-
-            builder.Property(m => m.Rating)
-                .HasColumnName("rating")
-                .IsRequired()
-                .HasAnnotation("CheckConstraint", "rating >= 0 AND rating <= 10")
-                .HasColumnType("decimal(3,1)");
 
             builder.Property(m => m.TrailerUrl)
                 .HasColumnName("trailer_url")

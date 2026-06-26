@@ -1,9 +1,11 @@
 import classes from './Schedule.module.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import {useMovie} from '../../../contexts/movieContext';
 import PurchaseWindow from '../PurchaseWindow/PurchaseWindow';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
+const IMAGE_URL = import.meta.env.VITE_URL;
 
 export default function Schedule() {
     const [halls, setHalls] = useState([]);
@@ -13,6 +15,7 @@ export default function Schedule() {
     const [selectedDate, setSelectedDate] = useState(null);
     const [dates, setDates] = useState([]);
     const [selectedSession, setSelectedSession] = useState(null);
+    const navigate = useNavigate();
 
     const generateDates = () => {
         const today = new Date();
@@ -151,13 +154,12 @@ export default function Schedule() {
     }
     
     if (selectedSession) {
-        return (
-            <PurchaseWindow
-                session = {selectedSession}
-                hallId={selectedSession.hallId}
-                onBack={handleOnBack}
-            />
-        );
+        navigate(`/schedule/${selectedSession.id}`, {
+            state: {
+                session: selectedSession,
+                hallId: selectedSession.hallId
+            }
+        });
     }
 
     const groupedByMovie  = groupSessionsByMovie();
@@ -191,55 +193,60 @@ export default function Schedule() {
                     ))}
                 </div>
                 <div className={classes.list}>
-                    {groupedByMovie.length === 0 ? (
-                        <div className={classes.no_sessions}>
-                            <p>На выбранную дату сеансов нет</p>
-                            <p>Попробуйте выбрать другую дату</p>
-                        </div>
-                    ) : (
-                        groupedByMovie.map((movieGroup) => (
-                            // <div key={movieGroup.movie.id} className={classes.hall_section}>
-                            <div key={movieGroup.movie.id} className={classes.movie_card}>
-                                <div className={classes.movie_poster}>
-                                    <img 
-                                        src={`http://localhost:5014${movieGroup.movie.posterUrl}`} 
-                                    />
-                                </div>
-                                <div className={classes.movie_info}>
-                                    <h4>{movieGroup.movie.title}</h4>
-                                    <p className={classes.movie_year}>{movieGroup.movie.year} год</p>
-                                    <p className={classes.movie_duration}>
-                                        {movieGroup.movie.duration} мин
-                                    </p>
-                                    {groupSessionsByMovieInHall(movieGroup.sessions).map((hallGroup) => (
-                                        <div className={classes.time_slots} key={hallGroup.hall.id}>
-                                            <span className={classes.hall_name}>{hallGroup.hall.name}</span>
-                                            {hallGroup.sessions.map((session) => (
-                                                <div className={classes.time_slot} key={session.id} >
-                                                    <button
-                                                        className={classes.time_btn}
-                                                        onClick={() => setSelectedSession(session)}
-                                                    >
-                                                        {new Date(session.startTime).toLocaleTimeString('ru-RU', {
-                                                            hour: '2-digit',
-                                                            minute: '2-digit'
-                                                        })}
-                                                    </button>
-                                                    <span className={classes.price}>{session.price}₽</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
+                    {isLoadingSessions ? 
+                        (<div className={classes.loading}>
+                            <div className={classes.spinner}></div>
+                            <p>Загрузка...</p>
+                        </div>) :
+                        (groupedByMovie.length === 0 ? (
+                            <div className={classes.no_sessions}>
+                                <p>На выбранную дату сеансов нет</p>
+                                <p>Попробуйте выбрать другую дату</p>
                             </div>
-                                // <div className={classes.movies_container}>
-                                //     {groupSessionsByMovieInHall(movieGroup.sessions).map((hallGroup) => (
-                                        
-                                //     ))}
+                        ) : (
+                            groupedByMovie.map((movieGroup) => (
+                                // <div key={movieGroup.movie.id} className={classes.hall_section}>
+                                <div key={movieGroup.movie.id} className={classes.movie_card}>
+                                    <div className={classes.movie_poster}>
+                                        <img 
+                                            src={`${IMAGE_URL}${movieGroup.movie.posterUrl}`} 
+                                        />
+                                    </div>
+                                    <div className={classes.movie_info}>
+                                        <h4>{movieGroup.movie.title}</h4>
+                                        <p className={classes.movie_year}>{movieGroup.movie.year} год {movieGroup.movie.age}+</p>
+                                        <p className={classes.movie_duration}>
+                                            {movieGroup.movie.duration} мин
+                                        </p>
+                                        {groupSessionsByMovieInHall(movieGroup.sessions).map((hallGroup) => (
+                                            <div className={classes.time_slots} key={hallGroup.hall.id}>
+                                                <span className={classes.hall_name}>{hallGroup.hall.name}</span>
+                                                {hallGroup.sessions.map((session) => (
+                                                    <div className={classes.time_slot} key={session.id} >
+                                                        <button
+                                                            className={classes.time_btn}
+                                                            onClick={() => setSelectedSession(session)}
+                                                        >
+                                                            {new Date(session.startTime).toLocaleTimeString('ru-RU', {
+                                                                hour: '2-digit',
+                                                                minute: '2-digit'
+                                                            })}
+                                                        </button>
+                                                        <span className={classes.price}>{session.price}₽</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                    // <div className={classes.movies_container}>
+                                    //     {groupSessionsByMovieInHall(movieGroup.sessions).map((hallGroup) => (
+                                            
+                                    //     ))}
+                                    // </div>
                                 // </div>
-                            // </div>
-                        ))
-                    )}
+                            ))
+                    ))}
                 </div>
             </div>
         </div>

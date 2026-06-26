@@ -60,6 +60,10 @@ export const MovieProvider = ({children}) => {
         }
     }
 
+    const updateMoviesState = (moviesData) => {
+        setMovies(moviesData);
+    }
+
     const value = {
         isLoading,
         movies,
@@ -67,6 +71,7 @@ export const MovieProvider = ({children}) => {
 
         fetchMovies,
         fetchMovie,
+        updateMoviesState
     }
     return(<>
         <MovieContext.Provider value={value}>

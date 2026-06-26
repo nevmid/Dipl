@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useMovie } from '../../../contexts/movieContext';
 import { useEffect} from 'react';
 
+const IMAGE_URL = import.meta.env.VITE_URL;
+
 export default function MovieInfo (){
     const {isLoading, fetchMovie, movie} = useMovie();
     const { id } = useParams(); 
@@ -31,7 +33,7 @@ export default function MovieInfo (){
         );
     }
 
-        const getEmbedUrl = (url) => {
+    const getEmbedUrl = (url) => {
         if (!url) return null;
         
         if (url.includes('youtube.com/watch?v=')) {
@@ -53,7 +55,7 @@ export default function MovieInfo (){
     };
 
     const embedUrl = movie?.trailerUrl ? getEmbedUrl(movie.trailerUrl) : null;
-
+    console.log(movie)
     return(
     <div className={classes.container}>
         <div className={classes.btn_back}>
@@ -64,7 +66,7 @@ export default function MovieInfo (){
             <div className={classes.poster_section}>
                 <div 
                     className={classes.poster}
-                    style={{ backgroundImage: `url("http://localhost:5014${movie.posterUrl}")` }}
+                    style={{ backgroundImage: `url("${IMAGE_URL}${movie.posterUrl}")` }}
                 >
                     {/* <h2>{movie.title}</h2>
                     <h4>{movie.year}</h4> */}
@@ -76,7 +78,7 @@ export default function MovieInfo (){
                     <span>{movie.title} ({movie.year})</span>
                 </div>
                 <div className={classes.orig_title}>
-                    <span>{movie.originalTitle}</span>
+                    <span>{movie.originalTitle} {movie.age}+</span>
                 </div>
                 <div className={classes.description}>
                     <h2>Описание</h2>
@@ -114,8 +116,8 @@ export default function MovieInfo (){
                             <span className={classes.info_value}>{movie.duration} мин.</span>
                         </li>
                         <li>
-                            <span className={classes.info_label}>Рейтинг:</span>
-                            <span className={classes.info_value}>⭐ {movie.rating}/10</span>
+                            <span className={classes.info_label}>Жанры:</span>
+                            <span className={classes.info_value}>{movie.genres?.map(genre => genre.name).join(", ")}</span>
                         </li>
                     </ul>
                 </div>

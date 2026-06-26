@@ -1,4 +1,5 @@
 ﻿using Backend.Models.DTOs.BookingDTOs;
+using Backend.Models.DTOs.PaymentDTOs;
 using Backend.Models.Entities;
 
 namespace Backend.Interfaces
@@ -10,7 +11,9 @@ namespace Backend.Interfaces
         public Task<List<BookingResponseDto>> GetUserBookingsAsync(int userId);
         public Task<List<BookingResponseDto>> GetAllBookingsAsync();
         public Task<bool> CancelBookingAsync(int id, int userId);
-        public Task<PaymentResponseDto?> ProcessPaymentAsync(ProcessPaymentDto dto, int userId);
         public Task<PaymentResponseDto?> GetPaymentStatusAsync(int bookingId, int userId);
+        Task<PaymentInitiationDto> InitiatePaymentAsync(int bookingId, int userId);
+        Task<bool> ConfirmPaymentAndGenerateTicketAsync(int bookingId, string transactionId);
+        public Task<RefundResponseDto> ProcessRefundAsync(int bookingId, string reason, int userId);
     }
 }

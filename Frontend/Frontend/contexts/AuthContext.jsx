@@ -139,6 +139,7 @@ export const AuthProvider = ({ children }) => {
         register,
 
         isAdmin: user?.role == 'admin',
+        isStaff: user?.role == 'staff'
     };
 
     return (<>

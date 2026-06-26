@@ -3,6 +3,7 @@ using Backend.Infrastructure;
 using Backend.Interfaces;
 using Backend.Models.DTOs.UserDTOs;
 using Backend.Models.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -37,16 +38,19 @@ namespace Backend.Services
                 throw new ValidationException("Неверный email или пароль");
             }
 
-            var token = _jwtProvider.generateAuthToken(user);
+            var roleName = await _userRepository.GetRoleNameById(user.RoleId);
 
             var response = new UserDto
             {
                 Id = user.Id,
                 Email = user.Email,
-                Role = user.Role,
+                Role = roleName!,
                 CreatedAt = user.CreatedAt,
                 loyaltyAccount = user.LoyaltyAccount ?? null
             };
+
+            var token = _jwtProvider.generateAuthToken(response);
+
 
             return (response, token);
         }
@@ -64,16 +68,18 @@ namespace Backend.Services
 
                 List<string> roles = ["admin", "user"];
 
-                if (!roles.Contains(createDto.Role))
+                if (!roles.Contains(createDto.Role.ToLower()))
                 {
                     throw new ValidationException($"Роль {createDto.Role} не существует");
                 }
+
+                var roleId = await _userRepository.GetRoleIdByName(createDto.Role.ToLower());
 
                 var user = new User
                 {
                     Email = createDto.Email.ToLower(),
                     PasswordHash = passwordHash,
-                    Role = createDto.Role.ToLower(),
+                    RoleId = roleId,
                     CreatedAt = DateTime.UtcNow
                 };
 
@@ -87,16 +93,17 @@ namespace Backend.Services
 
                 var createdAccount = await _userRepository.CreateLoyaltyAccount(account);
 
-                var token = _jwtProvider.generateAuthToken(user);
-
                 var response = new UserDto
                 {
                     Id = createdUser.Id,
                     Email = createdUser.Email,
-                    Role = createdUser.Role,
+                    Role = createDto.Role.ToLower(),
                     CreatedAt = createdUser.CreatedAt,
                     loyaltyAccount = createdAccount
                 };
+
+                var token = _jwtProvider.generateAuthToken(response);
+
 
                 return (response, token);
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using Backend.Interfaces;
 using Backend.Models.DTOs.MovieDTOs;
@@ -49,8 +50,8 @@ namespace Backend.Services
                 if (createMovieDto.Year < 1888 || createMovieDto.Year > DateTime.Now.Year + 2)
                     throw new ValidationException($"Год должен быть между 1888 и {DateTime.Now.Year + 2}");
 
-                if (createMovieDto.Rating < 0 || createMovieDto.Rating > 10)
-                    throw new ValidationException("Рейтинг должен быть от 0 до 10");
+                if (createMovieDto.Age < 0 || createMovieDto.Age > 100)
+                    throw new ValidationException($"Возраст должен быть от 0 до 100");
 
                 bool hasUrl = !string.IsNullOrEmpty(createMovieDto.PosterUrl);
                 bool hasFile = createMovieDto.PosterFile != null
@@ -77,6 +78,11 @@ namespace Backend.Services
                     savedFilePath = await SaveUploadedFileAsync(createMovieDto.PosterFile!);
                 }
 
+                if (createMovieDto.Genres == null || !createMovieDto.Genres.Any())
+                {
+                    throw new ValidationException("Необходимо выбрать хотя бы один жанр");
+                }
+
                 var movie = new Movie
                 {
                     Title = createMovieDto.Title.Trim(),
@@ -84,12 +90,12 @@ namespace Backend.Services
                     Description = createMovieDto.Description,
                     Year = createMovieDto.Year,
                     Duration = createMovieDto.Duration,
+                    Age = createMovieDto.Age,
                     PosterUrl = savedFilePath,
                     TrailerUrl = createMovieDto.TrailerUrl,
-                    Rating = createMovieDto.Rating
                 };
 
-                await _movieRepository.CreateMovie(movie);
+                await _movieRepository.CreateMovie(movie, createMovieDto.Genres);
 
                 return movie;
 
@@ -109,6 +115,7 @@ namespace Backend.Services
                 if (movie == null)
                     return false;
 
+                DeleteImage(movie.PosterUrl);
                 await _movieRepository.DeleteMovie(movie);
 
                 return true;
@@ -119,11 +126,11 @@ namespace Backend.Services
             }
         }
 
-        public async Task<Movie?> GetInfoAboutMovie(int id)
+        public async Task<MovieDto?> GetInfoAboutMovie(int id)
         {
             try
             {
-                var movie = await _movieRepository.GetMovieById(id);
+                var movie = await _movieRepository.GetMovieDtoById(id);
 
                 if (movie == null)
                     return null;
@@ -154,7 +161,7 @@ namespace Backend.Services
         {
             try
             {
-                var movie = await _movieRepository.GetMovieById(id);
+                var movie = await _movieRepository.GetMovieByIdForUpdate(id);
 
                 if (movie == null)
                     return null;
@@ -162,15 +169,15 @@ namespace Backend.Services
                 bool hasChanges = false;
 
                 if (!string.IsNullOrEmpty(updateMovieDto.Title)
-                    && movie.Title != updateMovieDto.Title.Trim().ToLower())
+                    && movie.Title.ToLower() != updateMovieDto.Title.Trim().ToLower())
                 {
-                    movie.Title = updateMovieDto.Title.Trim().ToLower();
+                    movie.Title = updateMovieDto.Title.Trim();
                     hasChanges = true;
                 }
                 if (!string.IsNullOrEmpty(updateMovieDto.OriginalTitle)
-                    && movie.OriginalTitle != updateMovieDto.OriginalTitle.Trim().ToLower())
+                    && movie.OriginalTitle.ToLower() != updateMovieDto.OriginalTitle.Trim().ToLower())
                 {
-                    movie.OriginalTitle = updateMovieDto.OriginalTitle.Trim().ToLower();
+                    movie.OriginalTitle = updateMovieDto.OriginalTitle.Trim();
                     hasChanges = true;
                 }
                 if (!string.IsNullOrEmpty(updateMovieDto.Description)
@@ -185,54 +192,80 @@ namespace Backend.Services
                     movie.Year = updateMovieDto.Year.Value;
                     hasChanges = true;
                 }
+
+                if (updateMovieDto.Age.HasValue
+                    && movie.Age != updateMovieDto.Age.Value)
+                {
+                    movie.Age = updateMovieDto.Age.Value;
+                    hasChanges = true;
+                }
+
                 if (updateMovieDto.Duration.HasValue
                     && movie.Duration != updateMovieDto.Duration.Value)
                 {
                     movie.Duration = updateMovieDto.Duration.Value;
                     hasChanges = true;
                 }
-                if (updateMovieDto.Rating.HasValue
-                    && movie.Rating != updateMovieDto.Rating.Value)
-                {
-                    movie.Rating = updateMovieDto.Rating.Value;
-                    hasChanges = true;
-                }
-                if(!string.IsNullOrEmpty(updateMovieDto.TrailerUrl) 
+
+                if (!string.IsNullOrEmpty(updateMovieDto.TrailerUrl) 
                     && movie.TrailerUrl != updateMovieDto.TrailerUrl)
                 {
                     movie.TrailerUrl = updateMovieDto.TrailerUrl;
                     hasChanges = true;
                 }
 
-                bool hasUrl = !string.IsNullOrEmpty(updateMovieDto.PosterUrl);
+                var allGenreIds = new List<int>();
+
+                if (updateMovieDto.Genres != null && updateMovieDto.Genres.Any())
+                {
+                    var genres = await _movieRepository.GetOrCreateGenresAsync(updateMovieDto.Genres);
+                    allGenreIds.AddRange(genres.Select(g => g.Id));
+                }
+
+                if (allGenreIds.Any())
+                {
+                    await _movieRepository.UpdateMovieGenres(movie.Id, allGenreIds);
+                    hasChanges = true;
+                }
+
+                bool hasNewUrl = !string.IsNullOrEmpty(updateMovieDto.PosterUrl)
+                 && updateMovieDto.PosterUrl != movie.PosterUrl;
                 bool hasFile = updateMovieDto.PosterFile != null
                     && updateMovieDto.PosterFile.Length > 0;
 
-                DeleteImage(movie.PosterUrl);
+                //if (!hasUrl && !hasFile)
+                //{
+                //    throw new ValidationException("Необходимо указать url или файл");
+                //}
 
-                if (!hasUrl && !hasFile)
+                if (hasNewUrl && hasFile)
                 {
-                    throw new ValidationException("Необходимо указать url или файл");
+                    throw new ValidationException("Необходимо указать либо url либо файл");
                 }
 
-                if (hasUrl && hasFile)
+                if (hasNewUrl || hasFile)
                 {
-                    throw new ValidationException("Необходимо укаать либо url либо файл");
-                }
 
-                string savedFilePath = null;
+                    string savedFilePath = null;
 
-                if (hasUrl)
-                {
-                    savedFilePath = await DownloadImageFromUrlAsync(updateMovieDto.PosterUrl!);
-                    movie.PosterUrl = savedFilePath;
-                    hasChanges = true;
-                }
-                else if (hasFile)
-                {
-                    savedFilePath = await SaveUploadedFileAsync(updateMovieDto.PosterFile!);
-                    movie.PosterUrl = savedFilePath;
-                    hasChanges = true;
+                    if (hasNewUrl)
+                    {
+                        savedFilePath = await DownloadImageFromUrlAsync(updateMovieDto.PosterUrl!);
+                    }
+                    else if (hasFile)
+                    {
+                        savedFilePath = await SaveUploadedFileAsync(updateMovieDto.PosterFile!);
+                    }
+
+                    if (!string.IsNullOrEmpty(savedFilePath))
+                    {
+                        if (!string.IsNullOrEmpty(movie.PosterUrl))
+                        {
+                            DeleteImage(movie.PosterUrl);
+                        }
+                        movie.PosterUrl = savedFilePath;
+                        hasChanges = true;
+                    }
                 }
 
                 if (hasChanges)
@@ -255,10 +288,9 @@ namespace Backend.Services
 
             try
             {
-
                 if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
                 {
-                    throw new ValidationException("Некорректный URL");
+                    throw new ValidationException("Некорректный URL изображения");
                 }
 
                 if (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
@@ -312,7 +344,7 @@ namespace Backend.Services
                 if (file == null || file.Length == 0)
                     throw new ValidationException("Файл не выбран");
 
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
                 var fileExtension = Path.GetExtension(file.FileName).ToLower();
 
                 if (!allowedExtensions.Contains(fileExtension))
@@ -360,6 +392,20 @@ namespace Backend.Services
                         File.Delete(filePath);
                     }
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Genre>> GetAllGenres()
+        {
+            try
+            {
+                var genres = await _movieRepository.GetAllGenres();
+
+                return genres;
             }
             catch (Exception)
             {

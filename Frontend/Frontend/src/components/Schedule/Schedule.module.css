@@ -233,3 +233,188 @@
 .time_btn:hover::before{
     width: 100%;
 }
+
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 30px;
+    }
+    
+    .main_list h2 {
+        font-size: 24pt;
+        padding-bottom: 30px;
+    }
+    
+    .movie_poster {
+        width: 130px;
+        height: 190px;
+    }
+    
+    .movie_info h4 {
+        font-size: 22px;
+    }
+    
+    .time_btn {
+        font-size: 16pt;
+    }
+    
+    .date_card {
+        min-width: 80px;
+        padding: 12px 8px;
+    }
+    
+    .day_name {
+        font-size: 12pt;
+    }
+    
+    .date {
+        font-size: 11pt;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .main_list h2 {
+        font-size: 20pt;
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+    
+    .list {
+        padding: 10px 15px 0 15px;
+    }
+    
+    .date_container {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 5px;
+        padding-bottom: 5px;
+    }
+    
+    .date_container::-webkit-scrollbar {
+        height: 1px;
+    }
+    
+    .date_container::-webkit-scrollbar-track {
+        background: rgba(0, 245, 255, 0.1);
+        border-radius: 1px;
+    }
+    
+    .date_container::-webkit-scrollbar-thumb {
+        background: #00F5FF;
+        border-radius: 3px;
+        width: 1px;
+    }
+    
+    .date_card {
+        min-width: 70px;
+        padding: 10px 8px;
+        text-align: center;
+    }
+    
+    .day_name {
+        font-size: 11pt;
+    }
+    
+    .date {
+        font-size: 10pt;
+    }
+    
+    .movie_card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .movie_poster {
+        width: 120px;
+        height: 170px;
+    }
+    
+    .movie_info h4 {
+        font-size: 18px;
+    }
+    
+    .movie_year, .movie_duration {
+        font-size: 14px;
+    }
+    
+    .time_slots {
+        justify-content: center;
+    }
+    
+    .time_slot {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hall_name {
+        font-size: 11px;
+    }
+    
+    .time_btn {
+        font-size: 14pt;
+    }
+    
+    .price {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+    
+    .main_list h2 {
+        font-size: 18pt;
+        padding-bottom: 15px;
+    }
+    
+    .list {
+        padding: 8px 10px 0 10px;
+    }
+    
+    .date_card {
+        min-width: 60px;
+        padding: 8px 5px;
+    }
+    
+    .day_name {
+        font-size: 10pt;
+    }
+    
+    .date {
+        font-size: 9pt;
+    }
+    
+    .movie_poster {
+        width: 100px;
+        height: 140px;
+    }
+    
+    .movie_info h4 {
+        font-size: 16px;
+    }
+    
+    .movie_year, .movie_duration {
+        font-size: 12px;
+    }
+    
+    .time_btn {
+        font-size: 12pt;
+    }
+    
+    .no_sessions {
+        padding: 40px 20px;
+        font-size: 14px;
+    }
+    
+    .no_sessions p {
+        margin: 5px 0;
+    }
+}

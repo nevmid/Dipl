@@ -55,7 +55,7 @@ namespace Backend.Repositories
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<(List<User> users, int totalCount)> GetUsers(int page, int pageSize)
+        public async Task<(List<UserDto> users, int totalCount)> GetUsers(int page, int pageSize)
         {
             var query = _context.Users
                 .Include(u => u.LoyaltyAccount);
@@ -65,16 +65,32 @@ namespace Backend.Repositories
             var users = await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Role = u.Role.Name,
+                    CreatedAt = u.CreatedAt,
+                    loyaltyAccount = u.LoyaltyAccount
+                })
                 .ToListAsync();
 
             return (users , totalCount);
         }
 
-        public async Task<List<User>> SearchUsers(string search, int limit)
+        public async Task<List<UserDto>> SearchUsers(string search, int limit)
         {
             return await _context.Users
                 .Where(u => u.Email.Contains(search))
                 .Take(limit)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Role = u.Role.Name,
+                    CreatedAt = u.CreatedAt,
+                    loyaltyAccount = u.LoyaltyAccount
+                })
                 .ToListAsync();
         }
 
@@ -82,6 +98,20 @@ namespace Backend.Repositories
         {
             await _context.SaveChangesAsync();
             return;
+        }
+
+        public async Task<int> GetRoleIdByName(string roleName)
+        {
+            return await _context.Roles
+                .Where(r => r.Name == roleName)
+                .Select(r => r.Id).FirstOrDefaultAsync();
+        }
+
+        public async Task<string?> GetRoleNameById(int roleId)
+        {
+            return await _context.Roles
+                .Where(r => r.Id == roleId)
+                .Select(r => r.Name).FirstOrDefaultAsync();
         }
     }
 }

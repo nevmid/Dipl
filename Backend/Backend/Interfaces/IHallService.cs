@@ -5,7 +5,7 @@ namespace Backend.Interfaces
 {
     public interface IHallService
     {
-        public Task<List<Hall>> GetHalls();
+        public Task<List<ResponseHallDto>> GetHalls();
         public Task<Hall?> GetHallById(int id);
         public Task<Hall?> UpdateHall(int id, RequestHallDto dto);
         public Task<bool> DeleteHall(int id);

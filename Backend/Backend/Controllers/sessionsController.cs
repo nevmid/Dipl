@@ -19,12 +19,12 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] DateTime? date)
+        public async Task<IActionResult> GetAll([FromQuery] DateTime? date, int? hallId)
         {
             try
             {
                 Console.WriteLine(date);
-                var sessions = await _sessionService.GetAll(date);
+                var sessions = await _sessionService.GetAll(date, hallId);
                 //Console.WriteLine(sessions[0].Hall.Name);
                 return Ok(new { success = true, sessions });
             }
@@ -73,11 +73,11 @@ namespace Backend.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "Server Error | Create Session");
+                return StatusCode(500, new { message = $"Server Error | Create Session: {ex}" });
             }
         }
 
@@ -105,15 +105,15 @@ namespace Backend.Controllers
             }
             catch(InvalidOperationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception)
             {
-                return StatusCode(500, "Server Error | Update Session");
+                return StatusCode(500, new { message = "Server Error | Update Session" });
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Backend.Interfaces
         public Task<(List<UserDto>, int totalCount)> GetUsersAsync(int page, int pageSize);
         public Task<List<UserDto>> SearchUsers(string query, int limit);
         public Task<UserDto?> DeleteUser(int  id);
-        public Task<bool> ChangeRole(int id, ChangeRoleDto changeRoleDto);
+        public Task<(bool, string?)> ChangeRole(int id, ChangeRoleDto changeRoleDto);
         public Task<bool> ChangePassword(int id, ChangePasswordDto changePasswordDto);
         public Task<bool> ChangeEmail(int id, ChangeEmailDto changeEmailDto);
         public Task<List<Booking>> GetUserBookingsAsync(int id);

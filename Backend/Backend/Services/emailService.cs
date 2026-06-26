@@ -26,7 +26,7 @@ namespace Backend.Services
         {
             try
             {
-                var baseUrl = "http://localhost";
+                var baseUrl =_configuration["App:BaseUrl"];
                 var resetLink = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}";
 
                 var subject = "Восстановление пароля";

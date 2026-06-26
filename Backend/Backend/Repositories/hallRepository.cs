@@ -35,12 +35,30 @@ namespace Backend.Repositories
         public async Task<List<Hall>> GetHalls()
         {
             return await _context.Halls
+                .Include(h => h.Seats)
+                .Include(h => h.Sessions)
                 .ToListAsync();
         }
 
-        public async Task<bool> HallIsExist(string name)
+        public async Task<bool> HallIsExist(string name, int? id)
         {
-            return await _context.Halls.AnyAsync(h => h.Name == name);
+            var query = _context.Halls.AsQueryable();
+
+            query = query.Where(h => h.Name.ToLower() == name.ToLower());
+
+            if (id.HasValue)
+            {
+                query = query.Where(h => h.Id != id.Value);
+            }
+
+            return await query.AnyAsync();
+        }
+
+        public async Task<bool> HasActiveSessions(int hallId)
+        {
+            return await _context.Sessions
+                .AnyAsync(s => s.HallId == hallId
+                    && s.StartTime > DateTime.UtcNow);
         }
 
         public async Task SaveChangesAsync()
